@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-//import './MainMenu.scss';
+import './MainMenu.scss';
 
 const MainMenu = ({ links, location }) => (
     <ul className="main-menu">
