@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from "../../common/Logo/Logo";
 import MainMenu from '../../layouts/MainMenu/MainMenu';
 
 class NavBar extends React.Component {
@@ -18,6 +19,7 @@ class NavBar extends React.Component {
 
         return (
             <nav className={'navbar'}>
+                <Logo />
                 <MainMenu links={links} />
             </nav>
         );
