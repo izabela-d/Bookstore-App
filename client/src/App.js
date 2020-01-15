@@ -1,12 +1,32 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import MainLayout from './components/layouts/MainLayout/MainLayout';
+import Home from './components/pages/HomeProductsList/HomePage';
+import Product from './components/pages/Product/ProductPages';
+import FAQ from './components/pages/FAQ/FaqPage';
+import Policy from './components/pages/Policy/PolicyPage';
+import Contact from './components/pages/Contact/ContactPage';
+import Cart from "./components/pages/Cart/CartPage";
+import NotFound from './components/pages/NotFound/NotFoundPage'
 
 class App extends React.Component {
 
   render() {
     return (
-        <div>
-          Hello world!
-        </div>
+        <MainLayout>
+            <Switch>
+                <Route path="/faq" exact component={FAQ} />
+                <Route path="/policy" exact component={Policy} />
+                <Route path="/contact" exact component={Contact} />
+                <Route path="/cart" exact component={Cart} />
+                <Route path="/:id" exact component={Product} />
+                <Route path="/" exact component={Home} />
+                <Route component={NotFound} />
+            </Switch>
+        </MainLayout>
     );
   }
 
