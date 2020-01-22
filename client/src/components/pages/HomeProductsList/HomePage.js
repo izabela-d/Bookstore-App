@@ -1,9 +1,21 @@
 import React from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import Products from "../../features/Products/ProductsContainer";
+import SideBar from '../../features/SideBar/SideBar'
 
 const HomePage = () => (
-    <div>
-        <h1>Home</h1>
-    </div>
+    <Container>
+        <Row>
+            <Col xs={3}>
+                <SideBar />
+            </Col>
+            <Col xs={9}>
+                <Products
+                    pages={3}
+                    productsPerPage={6}/>
+            </Col>
+        </Row>
+    </Container>
 );
 
 export default HomePage;
