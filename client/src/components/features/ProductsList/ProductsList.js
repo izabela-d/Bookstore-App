@@ -12,7 +12,6 @@ const ProductsList = (props) => {
         </div>
     );
 };
-
 ProductsList.propTypes = {
     products: PropTypes.arrayOf(
         PropTypes.shape({

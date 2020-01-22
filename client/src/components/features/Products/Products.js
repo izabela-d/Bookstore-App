@@ -31,13 +31,13 @@ class Products extends React.Component {
             <div>
                 <ProductsList products={products} />
                 {pagination &&
-                    <Pagination
-                        presentPage={presentPage}
-                        pages={pages}
-                        onPageChange={loadProductPage}
-                    />
+                <Pagination
+                    presentPage={presentPage}
+                    pages={pages}
+                    onPageChange={loadProductPage}
+                />
                 }
-           </div>
+            </div>
         );
     }
 }

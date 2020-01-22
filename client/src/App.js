@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import MainLayout from './components/layouts/MainLayout/MainLayout';
 import Home from './components/pages/HomeProductsList/HomePage';
-import Product from './components/pages/Product/ProductPages';
+import SingleProduct from './components/pages/SingleProduct/SingleProductPages';
 import FAQ from './components/pages/FAQ/FaqPage';
 import Policy from './components/pages/Policy/PolicyPage';
 import Contact from './components/pages/Contact/ContactPage';
@@ -22,7 +22,7 @@ class App extends React.Component {
                 <Route path="/policy" exact component={Policy} />
                 <Route path="/contact" exact component={Contact} />
                 <Route path="/cart" exact component={Cart} />
-                <Route path="/:id" exact component={Product} />
+                <Route path="/:id" exact component={SingleProduct} />
                 <Route path="/" exact component={Home} />
                 <Route component={NotFound} />
             </Switch>
