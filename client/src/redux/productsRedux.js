@@ -1,6 +1,13 @@
 /* SELECTORS */
 export const getProducts = ({ products }) => products.data;
 export const getSingleProduct = ({ products }) => products.singleProduct;
+export const getCartProducts = ({ products }) => products.cartProducts;
+export const getTotalPrice = ({ products }) => {
+    return products.cartProducts
+        .reduce((sum, product) => {
+            return sum + (product.quantity * product.price);
+        }, 0)
+};
 
 /* ACTIONS */
 // action name creator
@@ -9,14 +16,21 @@ const createActionName = name => `app/${reducerName}/${name}`;
 
 export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
 export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
+export const REMOVE_CART_PRODUCT = createActionName('REMOVE_CART_PRODUCT');
 
 export const loadProducts = payload => ({ payload, type: LOAD_PRODUCTS });
 export const loadSingleProduct = payload => ({ payload, type: LOAD_SINGLE_PRODUCT });
+export const removeCartProduct =  payload => ({ payload, type: REMOVE_CART_PRODUCT });
 
 /* INITIAL STATE */
 const initialState = {
     data: [],
     singleProduct: {},
+    cartProducts: [
+        { id: 'id1', title: 'product 1', quantity: 1, content: 'content 1', price: '12.00' },
+        { id: 'id2', title: 'product 2', quantity: 2, content: 'content 2', price: '12.00'},
+        { id: 'id3', title: 'product 3', quantity: 10, content: 'content 3', price: '14.00'}
+    ],
 };
 
 /* THUNKS */
@@ -57,6 +71,15 @@ export default function reducer(statePart = initialState, action = {}) {
             return { ...statePart, data: action.payload };
         case LOAD_SINGLE_PRODUCT:
             return { ...statePart, singleProduct: action.payload };
+        case REMOVE_CART_PRODUCT:
+            const productIdToRemove = action.payload;
+
+            return {
+                ...statePart,
+                cartProducts: statePart.cartProducts.filter((cartProduct) => {
+                    return cartProduct.id !== productIdToRemove;
+                })
+            };
         default:
             return statePart;
     }
