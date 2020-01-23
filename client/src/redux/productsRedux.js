@@ -17,10 +17,19 @@ const createActionName = name => `app/${reducerName}/${name}`;
 export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
 export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
 export const REMOVE_CART_PRODUCT = createActionName('REMOVE_CART_PRODUCT');
+export const CHANGE_QTY = createActionName('CHANGE_QTY');
 
 export const loadProducts = payload => ({ payload, type: LOAD_PRODUCTS });
 export const loadSingleProduct = payload => ({ payload, type: LOAD_SINGLE_PRODUCT });
 export const removeCartProduct =  payload => ({ payload, type: REMOVE_CART_PRODUCT });
+export const changeQty = (id, qty) => {
+    let payload = {
+        id: id,
+        qty: qty
+    };
+
+    return ({ payload, type: CHANGE_QTY });
+};
 
 /* INITIAL STATE */
 const initialState = {
@@ -80,6 +89,21 @@ export default function reducer(statePart = initialState, action = {}) {
                     return cartProduct.id !== productIdToRemove;
                 })
             };
+            case CHANGE_QTY:
+                const { id, qty } = action.payload;
+
+                return {
+                    ...statePart,
+                    cartProducts: statePart.cartProducts.map(
+                        (product) => {
+                            if (product.id !== id) {
+                                return product;
+                            }
+
+                            return { ...product, quantity: qty };
+                        }
+                    )
+                };
         default:
             return statePart;
     }

@@ -6,7 +6,7 @@ import CartProduct from './CartProduct';
 class Cart extends React.Component {
 
     render() {
-        const {cartProducts, totalPrice, onQtyChange, removeCartProduct} = this.props;
+        const {cartProducts, totalPrice, changeQty, removeCartProduct } = this.props;
 
         return (
             <div className="card-body">
@@ -20,7 +20,7 @@ class Cart extends React.Component {
                         content={product.content}
                         quantity={product.quantity}
                         stockCount={product.stockCount}
-                        onQtyChange={(e, id) => onQtyChange(e, id)}
+                        onQtyChange={(id, quantity) => changeQty(id, quantity)}
                         onRemoveProduct={(id) => removeCartProduct(id)}
                     />
                 })}

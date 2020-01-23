@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withRouter, Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 class CartProduct extends React.Component {
-
     render() {
-        const { id, title, price, content, quantity, onRemoveProduct} = this.props;
+        const { id, title, price, content, quantity, onRemoveProduct, onQtyChange } = this.props;
 
         return (
             <div  className="row">
@@ -24,9 +23,37 @@ class CartProduct extends React.Component {
                     </div>
                     <div className="col-4 col-sm-4 col-md-4">
                         <div className="quantity">
-                            <input type="button" value="+" className="plus" onChange={() => 111} />
-                            <input type="number" step="1" max="99" min="1" value={quantity} onChange={() => 111} title="Qty" className="qty" size="4" />
-                            <input type="button" value="-" className="minus" onChange={() => 111} />
+                            <input
+                                onClick={() => onQtyChange(id, quantity + 1)}
+                                type="button"
+                                value="+"
+                                className="plus"
+                            />
+                            <input
+                                type="number"
+                                step="1"
+                                max="99"
+                                min="1"
+                                value={quantity}
+                                onChange={(event) => {
+                                    const value = parseInt(event.target.value);
+
+                                    if (!isNaN(value)) {
+                                        onQtyChange(id, value)
+                                    } else {
+                                        onQtyChange(id, 0)
+                                    }
+                                }}
+                                title="Qty"
+                                className="qty"
+                                size="4"
+                            />
+                            <input
+                                onClick={() => onQtyChange(id, quantity - 1)}
+                                type="button"
+                                value="-"
+                                className="minus"
+                            />
                         </div>
                     </div>
                     <div className="col-2 col-sm-2 col-md-2 text-right">
