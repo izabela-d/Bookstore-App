@@ -10,9 +10,7 @@ const HomePage = () => (
                 <SideBar />
             </Col>
             <Col xs={9}>
-                <Products
-                    pages={3}
-                    productsPerPage={6}/>
+                <Products/>
             </Col>
         </Row>
     </Container>

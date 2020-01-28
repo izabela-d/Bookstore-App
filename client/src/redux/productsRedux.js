@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { API_URL } from '../config';
+
 /* SELECTORS */
 export const getProducts = ({ products }) => products.data;
 export const getSingleProduct = ({ products }) => products.singleProduct;
@@ -44,31 +47,30 @@ const initialState = {
     ],
 };
 
-//To jest tak jakby baza danych
-const mockedProducts = [
-    { id: 'id1', title: 'product 1', content: 'content', price: '12.00' },
-    { id: 'id2', title: 'product 2', content: 'content', price: '13.00'},
-    { id: 'id3', title: 'product 3', content: 'content', price: '14.00'},
-    { id: 'id4', title: 'product 4', content: 'content', price: '15.00'},
-    { id: 'id5', title: 'product 5', content: 'content', price: '16.00'},
-    { id: 'id6', title: 'product 6', content: 'content', price: '17.00'},
-    { id: 'id7', title: 'product 7', content: 'content', price: '12.00'},
-    { id: 'id8', title: 'product 8', content: 'content', price: '12.00'},
-    { id: 'id9', title: 'product 9', content: 'content', price: '14.00'},
-];
-
 /* THUNKS */
-export const loadProductsByPageRequest = () => {
+/*export const loadProductsByPageRequest = () => {
     return async dispatch => {
-        dispatch(loadProducts(mockedProducts));
+        axios.get(`${API_URL}/products`).then(res => {
+            dispatch(loadProducts(res.data));
+        })
+    };
+};*/
+
+export const loadProductsRequest = () => {
+    return async dispatch => {
+
+        axios.get(`${API_URL}/products`).then(res => {
+            dispatch(loadProducts(res.data));
+        })
     };
 };
 
 export const loadSingleProductRequest = id => {
     return async dispatch => {
-        const product = mockedProducts.filter(singleProduct => singleProduct.id === id);
+        axios.get(`${API_URL}/products/${id}`).then(res => {
 
-        dispatch(loadSingleProduct(product[0]));
+            dispatch(loadSingleProduct(res.data));
+        })
     };
 };
 

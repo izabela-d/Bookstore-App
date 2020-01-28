@@ -5,7 +5,7 @@ import ProductsList from "../ProductsList/ProductsList";
 
 class Products extends React.Component {
 
-    state = {
+    /*state = {
         presentPage: this.props.initialPage || 1
     };
 
@@ -20,15 +20,22 @@ class Products extends React.Component {
         this.setState({presentPage: page});
 
         loadProductsByPage(page, this.props.productsPerPage);
-    };
+    };*/
+
+    componentDidMount() {
+        const { loadProducts } = this.props;
+        loadProducts();
+    }
 
     render() {
-        const { products, pages, pagination } = this.props;
+        /*const { products, pages, pagination } = this.props;
         const { loadProductPage } = this;
-        const { presentPage } = this.state;
+        const { presentPage } = this.state;*/
+
+        const { products } = this.props;
 
         return (
-            <div>
+            /*<div>
                 <ProductsList products={products} />
                 {pagination &&
                 <Pagination
@@ -37,6 +44,9 @@ class Products extends React.Component {
                     onPageChange={loadProductPage}
                 />
                 }
+            </div>*/
+            <div>
+                <ProductsList products={products} />
             </div>
         );
     }
@@ -53,8 +63,9 @@ Products.propTypes = {
     ),
     productsPerPage: PropTypes.number,
     initialPage: PropTypes.number,
-    loadProductsByPage: PropTypes.func.isRequired,
+    //loadProductsByPage: PropTypes.func.isRequired,
     pagination: PropTypes.bool,
+    loadProducts: PropTypes.func.isRequired,
 };
 
 Products.defaultProps = {
