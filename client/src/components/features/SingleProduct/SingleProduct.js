@@ -3,6 +3,12 @@ import { PropTypes } from 'prop-types';
 import { withRouter } from "react-router-dom";
 
 class SingleProduct extends React.Component {
+
+    handleClick = (id) => {
+        this.props.addProductToCart (id);
+        this.props.history.push("/cart");
+    };
+
     componentDidMount() {
         const { loadSingleProduct, match} = this.props;
 
@@ -15,7 +21,17 @@ class SingleProduct extends React.Component {
         return (
             <div>
                 Single Product
-                <p>{singleProduct.title}</p>
+                <div>
+                    <p>{singleProduct.title}</p>
+                    <p>{singleProduct.price}</p>
+                    <p>{singleProduct.content}</p>
+                    <button
+                        onClick = {() => {this.handleClick (singleProduct.id)}}
+                        type="button"
+                        className="btn btn-outline-danger btn-xs">
+                        Add product
+                    </button>
+                </div>
             </div>
         );
     }
@@ -29,6 +45,7 @@ SingleProduct.propTypes = {
         price: PropTypes.string,
     }),
     loadSingleProduct: PropTypes.func.isRequired,
+    addProductToCart: PropTypes.func.isRequired,
 };
 
 export default withRouter(props => <SingleProduct {...props}/>);
