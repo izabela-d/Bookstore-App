@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 
+import './Pagination.scss';
+
 class Pagination extends React.Component {
 
     changePage = (newPage) => {
@@ -16,33 +18,34 @@ class Pagination extends React.Component {
         const { changePage } = this;
 
         return (
-            <nav aria-label="Page navigation example">
-                <ul className="pagination">
+            <div className="pagination">
+                <ul className="pagination__list">
+
                     {presentPage > 1 &&
-                        <li className="page-item">
-                            <a className="page-link" href="#" aria-label="Previous">
-                                <FontAwesomeIcon icon={faChevronLeft} />
-                            </a>
-                        </li>
+                    <li
+                        onClick={() => { changePage(presentPage -1)}}>
+                        <FontAwesomeIcon icon={faChevronLeft} />
+                    </li>
                     }
 
                     {[...Array(pages)].map((el, page) =>
                         <li
                             key={++page}
-                            className={`page-item pagination__list__item${((page) === presentPage) ? ' pagination__list__item--active' : ''}`}>
-                            <a onClick={() => { changePage(page) }} className="page-link" href="#">{page}</a>
+                            onClick={() => { changePage(page) }}
+                            className={`pagination__list__item${((page) === presentPage) ? ' pagination__list__item--active' : ''}`}>
+                            {page}
                         </li>
                     )}
 
                     {presentPage < pages &&
-                        <li className="page-item">
-                            <a className="page-link" href="#" aria-label="Next">
-                                <FontAwesomeIcon icon={faChevronRight} />
-                            </a>
-                        </li>
+                    <li
+                        onClick={() => { changePage(presentPage +1)}}>
+                        <FontAwesomeIcon icon={faChevronRight} />
+                    </li>
                     }
+
                 </ul>
-            </nav>
+            </div>
         );
     }
 

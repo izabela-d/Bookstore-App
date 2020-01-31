@@ -5,16 +5,15 @@ import { Col, Button } from "reactstrap";
 
 const ProductsSummary = ({ id, title, content, price }) => (
     <Col xs={6} key={id}>
-        <div className={'product-box'}>
-            <img src={'https://via.placeholder.com/150'} alt={'photo'}/>
-            <div className={'label-product'}>
-                <p>{ title }</p>
-                <p>{ price }</p>
+        <Link to={`/${id}`}>
+            <div className={'product-box'}>
+                <img src={'https://via.placeholder.com/150'} alt={'photo'}/>
+                <div className={'label-product'}>
+                    <p>{ title }</p>
+                    <p>{ price }</p>
+                </div>
             </div>
-            <Button variant="primary">
-                <Link to={`/${id}`}>Read more</Link>
-            </Button>
-        </div>
+        </Link>
     </Col>
 );
 
