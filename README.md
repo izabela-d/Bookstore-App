@@ -5,6 +5,6 @@ Todo:
 - [x] Coupon code
 - [x] currency
 - [ ] Request loader
-- [ ] Photos
+- [x] Photos
 - [ ] reducer na dwa
 - [ ] Styles

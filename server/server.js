@@ -14,6 +14,7 @@ const checkoutRoutes = require('./routes/checkout.routes');
 app.use(cors());
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
+app.use(express.static('public'));
 app.use('/api/products', productRoutes);
 app.use('/api/checkout', checkoutRoutes);
 app.use(helmet());
@@ -26,8 +27,8 @@ db.once('open', () => {
     console.log('Connected to the database');
     loadTestData();
 });
-db.on('error', (err) => console.log('Error ' + err));
 
+db.on('error', (err) => console.log('Error ' + err));
 
 app.listen(config.PORT, function() {
     console.log('Server is running on Port:', config.PORT)

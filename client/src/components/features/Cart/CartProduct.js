@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import Currency from "../../common/Currency/Currency";
+import Image from "../../common/Image/Image";
 
 class CartProduct extends React.Component {
     render() {
-        const { id, title, price, content, quantity, onRemoveProduct, onQtyChange } = this.props;
+        const { id, image, title, price, content, quantity, onRemoveProduct, onQtyChange } = this.props;
 
         return (
             <div  className="row">
                 <div className="col-12 col-sm-12 col-md-2 text-center">
-                    <img className="img-responsive" src="http://placehold.it/120x80" alt="prewiew" width="120" height="80" />
+                    <Image image={image}/>
                 </div>
                 <div className="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
                     <h4 className="product-name"><strong>{title}</strong></h4>
@@ -70,6 +71,7 @@ class CartProduct extends React.Component {
 
 CartProduct.propTypes = {
     id: PropTypes.string,
+    image: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.string,
     count: PropTypes.number,

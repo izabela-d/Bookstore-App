@@ -30,6 +30,7 @@ class Cart extends React.Component {
                     return <CartProduct
                         key={product.id}
                         id={product.id}
+                        image={product.image}
                         title={product.title}
                         price={product.price}
                         content={product.content}
@@ -73,6 +74,7 @@ Cart.propTypes = {
     Cart: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.string,
+            image: PropTypes.string,
             title: PropTypes.string,
             content: PropTypes.string,
             price: PropTypes.string,

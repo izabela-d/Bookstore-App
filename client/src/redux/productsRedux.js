@@ -53,9 +53,9 @@ const initialState = {
     data: [],
     singleProduct: {},
     cartProducts: [
-        { id: 'id7', title: 'productg', quantity: 1, content: 'content 1', price: '12.00' },
-        { id: 'id8', title: 'producth', quantity: 2, content: 'content 2', price: '12.00'},
-        { id: 'id9', title: 'producti', quantity: 10, content: 'content 3', price: '14.00'}
+        { id: 'id7', image: 'book1.jpg', title: 'productg', quantity: 1, content: 'content 1', price: '12.00' },
+        { id: 'id8', image: 'book1.jpg', title: 'producth', quantity: 2, content: 'content 2', price: '12.00'},
+        { id: 'id9', image: 'book1.jpg', title: 'producti', quantity: 10, content: 'content 3', price: '14.00'}
     ],
     amount: 0,
     presentPage: 1,

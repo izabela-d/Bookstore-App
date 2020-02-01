@@ -2,6 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { withRouter } from "react-router-dom";
 import Currency from "../../common/Currency/Currency";
+import Image from "../../common/Image/Image";
 
 class SingleProduct extends React.Component {
 
@@ -23,6 +24,7 @@ class SingleProduct extends React.Component {
             <div>
                 Single Product
                 <div>
+                    <Image image={singleProduct.image}/>
                     <p>{singleProduct.feature}</p>
                     <p>{singleProduct.title}</p>
                     {singleProduct.oldPrice &&
@@ -49,6 +51,7 @@ class SingleProduct extends React.Component {
 SingleProduct.propTypes = {
     singleProduct: PropTypes.shape({
         id: PropTypes.string,
+        image: PropTypes.string,
         title: PropTypes.string,
         content: PropTypes.string,
         oldPrice: PropTypes.string,
