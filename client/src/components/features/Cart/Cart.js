@@ -5,8 +5,19 @@ import CartProduct from './CartProduct';
 
 class Cart extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            couponCode: ''
+        }
+    }
+
     handleClick = () => {
-        this.props.checkout (this.props.cartProducts);
+        this.props.checkout (this.props.cartProducts, this.state.couponCode);
+    };
+
+    handleCouponCode = (event) => {
+        this.setState({couponCode: event.target.value})
     };
 
     render() {
@@ -31,11 +42,13 @@ class Cart extends React.Component {
                 <div className="card-footer">
                     <div className="coupon col-md-5 col-sm-5 no-padding-left pull-left">
                         <div className="row">
-                            <div className="col-6">
-                                <input type="text" className="form-control" placeholder="cupone code"/>
-                            </div>
-                            <div className="col-6">
-                                <input type="submit" className="btn btn-default" value="Use cupone"/>
+                            <div className="">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="cupone code"
+                                    onChange={this.handleCouponCode}
+                                />
                             </div>
                         </div>
                     </div>

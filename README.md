@@ -2,7 +2,8 @@
 
 Todo:  
 - [x] Filter
-- [ ] Coupon code
+- [x] Coupon code
+- [ ] currency
 - [ ] Request loader
 - [ ] Photos
 - [ ] reducer na dwa

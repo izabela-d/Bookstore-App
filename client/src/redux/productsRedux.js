@@ -104,9 +104,11 @@ export const loadSingleProductRequest = id => {
     };
 };
 
-export const checkoutRequest = (cartProducts) => {
+export const checkoutRequest = (cartProducts, couponCode) => {
     return async dispatch => {
-        axios.post(`${API_URL}/checkout`, cartProducts).then(res => {
+        const data = {cartProducts, couponCode};
+
+        axios.post(`${API_URL}/checkout`, data).then(res => {
 
             dispatch(checkout(res.data));
         })
