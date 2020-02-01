@@ -1,23 +1,38 @@
 import React from 'react';
-import {ListGroup, ListGroupItem} from "reactstrap";
+import PropTypes from 'prop-types';
+import { ListGroup } from "reactstrap";
 
-class SideBar extends React.Component {
+const SideBar = (props) =>  {
 
-    render() {
-        return (
-            <div>
-                <h3>Sort:</h3>
-                <ListGroup>
-                    <ListGroupItem>Cras justo odio</ListGroupItem>
-                    <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-                    <ListGroupItem>Morbi leo risus</ListGroupItem>
-                    <ListGroupItem>Porta ac consectetur ac</ListGroupItem>
-                    <ListGroupItem>Vestibulum at eros</ListGroupItem>
-                </ListGroup>
-            </div>
-        );
-    }
+    const handleOnClick = (key, direction) => {
+        props.sort(1, 10, key, direction);
+    };
 
-}
+    return (
+        <div>
+            <h3>Sort:</h3>
+            <ListGroup>
+                <button onClick={() => handleOnClick('title', 'desc')}>By title desc</button>
+                <button onClick={() => handleOnClick('title', 'asc')}>By title asc</button>
+                <button onClick={() => handleOnClick('price', 'desc')}>By price desc</button>
+                <button onClick={() => handleOnClick('price', 'asc')}>By price asc</button>
+            </ListGroup>
+        </div>
+    );
+
+
+};
+
+SideBar.propTypes = {
+    sort: PropTypes.func.isRequired,
+    productsPerPage: PropTypes.number,
+};
+
+
+SideBar.defaultProps = {
+    initialPage: 1,
+    productsPerPage: 10,
+};
+
 
 export default SideBar;

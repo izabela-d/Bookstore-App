@@ -16,10 +16,10 @@ class Products extends React.Component {
     }
 
     loadProductPage = (page) => {
-        const { loadProductsByPage } = this.props;
+        const { loadProductsByPage, sortBy, direction } = this.props;
         this.setState({presentPage: page});
 
-        loadProductsByPage(page, this.props.productsPerPage);
+        loadProductsByPage(page, this.props.productsPerPage, sortBy, direction);
     };
 
     render() {
@@ -58,6 +58,8 @@ Products.propTypes = {
     initialPage: PropTypes.number,
     loadProductsByPage: PropTypes.func.isRequired,
     pagination: PropTypes.bool,
+    sortBy: PropTypes.string.isRequired,
+    direction: PropTypes.string.isRequired,
 };
 
 Products.defaultProps = {

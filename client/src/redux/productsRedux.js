@@ -13,6 +13,8 @@ export const getTotalPrice = ({ products }) => {
 };
 export const getPages = ({ products }) => Math.ceil(products.amount / products.productsPerPage);
 export const getSummary = ( { products }) => products.summary;
+export const getSortBy = ({ products }) => products.sortBy;
+export const getDirection = ({ products }) => products.direction;
 
 /* ACTIONS */
 // action name creator
@@ -25,6 +27,7 @@ export const ADD_PRODUCT = createActionName('ADD_PRODUCT');
 export const REMOVE_CART_PRODUCT = createActionName('REMOVE_CART_PRODUCT');
 export const CHANGE_QTY = createActionName('CHANGE_QTY');
 export const CHECKOUT = createActionName('CHECKOUT');
+export const SORT = createActionName('SORT');
 
 export const loadProductsByPage = payload => ({ payload, type: LOAD_PRODUCTS });
 export const loadSingleProduct = payload => ({ payload, type: LOAD_SINGLE_PRODUCT });
@@ -39,6 +42,7 @@ export const changeQty = (id, qty) => {
     return ({ payload, type: CHANGE_QTY });
 };
 export const checkout = payload => ({payload, type: CHECKOUT});
+export const sort = payload => ({ payload, type: SORT });
 
 /* INITIAL STATE */
 const initialState = {
@@ -52,6 +56,8 @@ const initialState = {
     amount: 0,
     productsPerPage: 10,
     presentPage: 1,
+    sortBy: 'title',
+    direction: 'asc',
     summary: {
         items: [],
         sum: 0,
@@ -59,18 +65,20 @@ const initialState = {
 };
 
 /* THUNKS */
-export const loadProductsByPageRequest = (page, productsPerPage) => {
+export const loadProductsByPageRequest = (page, productsPerPage, sortBy = 'title', direction = 'asc') => {
     return async dispatch => {
 
         const startAt = (page - 1) * productsPerPage;
 
-        let res = await axios.get(`${API_URL}/products/range/${startAt}/${productsPerPage}`);
+        let res = await axios.get(`${API_URL}/products/range/${startAt}/${productsPerPage}?sortBy=${sortBy}&direction=${direction}`);
 
         const payload = {
             products: res.data.products,
             amount: res.data.amount,
             productsPerPage,
             presentPage: page,
+            sortBy,
+            direction,
         };
 
         dispatch(loadProductsByPage(payload));
@@ -105,6 +113,8 @@ export default function reducer(statePart = initialState, action = {}) {
                 presentPage: action.payload.presentPage,
                 amount: action.payload.amount,
                 data: [...action.payload.products],
+                sortBy: action.payload.sortBy,
+                direction: action.payload.direction,
             };
         case LOAD_SINGLE_PRODUCT:
             return { ...statePart, singleProduct: action.payload };
