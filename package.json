@@ -1,8 +1,8 @@
 {
-  "name": "FinallyApp",
+  "name": "Bookstore-App",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:izabela-d/FinallyApp.git",
+  "repository": "git@github.com:izabela-d/Bookstore-App.git",
   "author": "Izabela Depa <izabela1depa@gmail.com>",
   "license": "MIT",
   "scripts": {
