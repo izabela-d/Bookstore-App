@@ -18,6 +18,7 @@ export const getPages = ({ products }) => Math.ceil(products.amount / PRODUCTS_P
 export const getSummary = ( { products }) => products.summary;
 export const getSortBy = ({ products }) => products.sortBy;
 export const getDirection = ({ products }) => products.direction;
+export const getSearch = ({ products }) => products.search;
 
 /* ACTIONS */
 // action name creator
@@ -64,15 +65,22 @@ const initialState = {
         items: [],
         sum: 0,
     },
+    search: '',
 };
 
 /* THUNKS */
-export const loadProductsByPageRequest = (page, sortBy = 'title', direction = 'asc') => {
+export const loadProductsByPageRequest = (page, sortBy = 'title', direction = 'asc', search = '') => {
     return async dispatch => {
 
         const startAt = (page - 1) * PRODUCTS_PER_PAGE;
 
-        let res = await axios.get(`${API_URL}/products/range/${startAt}/${PRODUCTS_PER_PAGE}?sortBy=${sortBy}&direction=${direction}`);
+        let url = `${API_URL}/products/range/${startAt}/${PRODUCTS_PER_PAGE}?sortBy=${sortBy}&direction=${direction}`;
+
+        if (search) {
+            url = url + `&search=${search}`
+        }
+
+        let res = await axios.get(url);
 
         const payload = {
             products: res.data.products,
@@ -80,6 +88,7 @@ export const loadProductsByPageRequest = (page, sortBy = 'title', direction = 'a
             presentPage: page,
             sortBy,
             direction,
+            search,
         };
 
         dispatch(loadProductsByPage(payload));
@@ -115,6 +124,7 @@ export default function reducer(statePart = initialState, action = {}) {
                 data: [...action.payload.products],
                 sortBy: action.payload.sortBy,
                 direction: action.payload.direction,
+                search: action.payload.search,
             };
         case LOAD_SINGLE_PRODUCT:
             return { ...statePart, singleProduct: action.payload };

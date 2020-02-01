@@ -23,12 +23,17 @@ exports.getProductsByRange = async function (req, res) {
 
     try {
         let { startAt, limit } = req.params;
-        const { sortBy, direction } = req.query;
+        const { sortBy, direction, search } = req.query;
+
+        let query = {};
+        if (search) {
+            query = { title: { $regex: search, $options: 'i' } }
+        }
 
         startAt = parseInt(startAt);
         limit = parseInt(limit);
 
-        const products = await Product.find().sort({ [sortBy]: direction}).skip(startAt).limit(limit);
+        const products = await Product.find(query).sort({ [sortBy]: direction}).skip(startAt).limit(limit);
         const amount = await Product.countDocuments();
 
         res.status(200).json({
