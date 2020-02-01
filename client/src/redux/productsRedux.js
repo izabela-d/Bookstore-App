@@ -12,6 +12,7 @@ export const getTotalPrice = ({ products }) => {
         }, 0)
 };
 export const getPages = ({ products }) => Math.ceil(products.amount / products.productsPerPage);
+export const getSummary = ( { products }) => products.summary;
 
 /* ACTIONS */
 // action name creator
@@ -23,6 +24,7 @@ export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
 export const ADD_PRODUCT = createActionName('ADD_PRODUCT');
 export const REMOVE_CART_PRODUCT = createActionName('REMOVE_CART_PRODUCT');
 export const CHANGE_QTY = createActionName('CHANGE_QTY');
+export const CHECKOUT = createActionName('CHECKOUT');
 
 export const loadProductsByPage = payload => ({ payload, type: LOAD_PRODUCTS });
 export const loadSingleProduct = payload => ({ payload, type: LOAD_SINGLE_PRODUCT });
@@ -36,19 +38,24 @@ export const changeQty = (id, qty) => {
 
     return ({ payload, type: CHANGE_QTY });
 };
+export const checkout = payload => ({payload, type: CHECKOUT});
 
 /* INITIAL STATE */
 const initialState = {
     data: [],
     singleProduct: {},
     cartProducts: [
-        { id: 'id7', title: 'product 7', quantity: 1, content: 'content 7', price: '12.00' },
-        { id: 'id8', title: 'product 8', quantity: 2, content: 'content 8', price: '12.00'},
-        { id: 'id9', title: 'product 9', quantity: 10, content: 'content 9', price: '14.00'}
+        { id: 'id7', title: 'productg', quantity: 1, content: 'content 1', price: '12.00' },
+        { id: 'id8', title: 'producth', quantity: 2, content: 'content 2', price: '12.00'},
+        { id: 'id9', title: 'producti', quantity: 10, content: 'content 3', price: '14.00'}
     ],
     amount: 0,
     productsPerPage: 10,
     presentPage: 1,
+    summary: {
+        items: [],
+        sum: 0,
+    },
 };
 
 /* THUNKS */
@@ -67,8 +74,6 @@ export const loadProductsByPageRequest = (page, productsPerPage) => {
         };
 
         dispatch(loadProductsByPage(payload));
-
-
     };
 };
 
@@ -77,6 +82,15 @@ export const loadSingleProductRequest = id => {
         axios.get(`${API_URL}/products/${id}`).then(res => {
 
             dispatch(loadSingleProduct(res.data));
+        })
+    };
+};
+
+export const checkoutRequest = (cartProducts) => {
+    return async dispatch => {
+        axios.post(`${API_URL}/checkout`, cartProducts).then(res => {
+
+            dispatch(checkout(res.data));
         })
     };
 };
@@ -138,21 +152,26 @@ export default function reducer(statePart = initialState, action = {}) {
                     return cartProduct.id !== productIdToRemove;
                 })
             };
-            case CHANGE_QTY:
-                const { id, qty } = action.payload;
+        case CHANGE_QTY:
+            const { id, qty } = action.payload;
 
-                return {
-                    ...statePart,
-                    cartProducts: statePart.cartProducts.map(
-                        (product) => {
-                            if (product.id !== id) {
-                                return product;
-                            }
-
-                            return { ...product, quantity: qty };
+            return {
+                ...statePart,
+                cartProducts: statePart.cartProducts.map(
+                    (product) => {
+                        if (product.id !== id) {
+                            return product;
                         }
-                    )
-                };
+
+                        return { ...product, quantity: qty };
+                    }
+                )
+            };
+        case CHECKOUT:
+            return {
+                ...statePart,
+                summary: action.payload
+            };
         default:
             return statePart;
     }

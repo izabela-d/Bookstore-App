@@ -91,12 +91,14 @@ const loadTestData = async () => {
 
     try {
         let counter = await Product.countDocuments();
+
         if(counter > 0) {
             await Product.collection.drop();
             console.log('No posts. Loading data...');
-            await Product.create(data);
-            console.log('Test data has been successfully loaded');
         }
+
+        await Product.create(data);
+        console.log('Test data has been successfully loaded');
     } catch (err) {
         console.log('Couldn\'t load test data', err);
     }

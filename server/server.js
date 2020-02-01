@@ -9,11 +9,13 @@ const app = express();
 
 // import routes
 const productRoutes = require('./routes/product.routes');
+const checkoutRoutes = require('./routes/checkout.routes');
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use('/api/products', productRoutes);
+app.use('/api/checkout', checkoutRoutes);
 app.use(helmet());
 
 // connects our back end code with the database

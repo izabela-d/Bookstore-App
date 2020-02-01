@@ -11,6 +11,7 @@
     "nodemon": "1.19.1"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test-data": "node testData.js"
   }
 }

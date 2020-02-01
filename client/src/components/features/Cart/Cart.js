@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import CartProduct from './CartProduct';
 
 class Cart extends React.Component {
+
+    handleClick = () => {
+        this.props.checkout (this.props.cartProducts);
+    };
 
     render() {
         const {cartProducts, totalPrice, changeQty, removeCartProduct } = this.props;
@@ -36,7 +40,12 @@ class Cart extends React.Component {
                         </div>
                     </div>
                     <div className="pull-right">
-                        <a href="" className="btn btn-success pull-right">Checkout</a>
+                        <Link to="/summary"
+                              className="btn btn-success pull-right"
+                              onClick = {() => {this.handleClick ()}}
+                        >
+                            Checkout
+                        </Link>
                         <div className="pull-right" >
                             Total price: <b>{totalPrice}</b>
                         </div>
