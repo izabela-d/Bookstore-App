@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Col } from "reactstrap";
 import './ProductSummary.scss';
 
-const ProductsSummary = ({ id, title, price, feature }) => (
+const ProductsSummary = ({ id, title, oldPrice, price, feature }) => (
     <Col xs={6} key={id} className={'product-container'}>
         <Link to={`/${id}`}>
             <div className={'product-box'}>
@@ -12,7 +12,7 @@ const ProductsSummary = ({ id, title, price, feature }) => (
                 <div className={'label-product'}>
                     <p>{ feature }</p>
                     <p>{ title }</p>
-                    <p>{ price }</p>
+                    <p><span className={'old-price'}>{ oldPrice }</span>{ price }</p>
                 </div>
             </div>
         </Link>
@@ -20,9 +20,10 @@ const ProductsSummary = ({ id, title, price, feature }) => (
 );
 
 ProductsSummary.propTypes = {
-    id: PropTypes.string,
-    title: PropTypes.string,
-    content: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    oldPrice: PropTypes.string,
     feature: PropTypes.string,
 };
 

@@ -4,6 +4,13 @@
 
     .product-box {
       text-align: center;
+
+      .label-product {
+        .old-price {
+          text-decoration: line-through;
+          padding-right: 5px;
+        }
+      }
     }
   }
 }

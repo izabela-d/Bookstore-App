@@ -5,6 +5,7 @@ const Product = new Schema({
     id: { type: 'String', required: true },
     title: { type: 'String', required: true },
     content: { type: 'String', required: true },
+    oldPrice: { type: 'String', required: false},
     price:  {type: 'String', required: true },
     feature: {type: 'String', required: false},
 });
