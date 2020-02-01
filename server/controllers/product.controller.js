@@ -24,13 +24,10 @@ exports.getProductsByRange = async function (req, res) {
     try {
         let { startAt, limit } = req.params;
 
-        console.log(startAt)
-        console.log(limit)
-
         startAt = parseInt(startAt);
         limit = parseInt(limit);
 
-        const products = await Product.find();//.skip(startAt).limit(limit);
+        const products = await Product.find().skip(startAt).limit(limit);
         const amount = await Product.countDocuments();
 
         res.status(200).json({
