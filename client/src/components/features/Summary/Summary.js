@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import Currency from "../../common/Currency/Currency";
 
 class Summary extends React.Component {
     render() {
@@ -24,7 +25,7 @@ class Summary extends React.Component {
                                    {item.quantity}
                                </td>
                                <td>
-                                   {item.price}
+                                   <Currency value={item.price}/>
                                </td>
                            </tr>
                        )

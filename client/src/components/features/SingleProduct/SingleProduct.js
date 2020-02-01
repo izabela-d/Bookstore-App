@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { withRouter } from "react-router-dom";
+import Currency from "../../common/Currency/Currency";
 
 class SingleProduct extends React.Component {
 
@@ -24,7 +25,14 @@ class SingleProduct extends React.Component {
                 <div>
                     <p>{singleProduct.feature}</p>
                     <p>{singleProduct.title}</p>
-                    <p>{singleProduct.price}</p>
+                    {singleProduct.oldPrice &&
+                    <span className={'old-price'}>
+                            <Currency value={singleProduct.oldPrice}/>
+                        </span>
+                    }
+                    <p>
+                        <Currency value={singleProduct.price}/>
+                    </p>
                     <p>{singleProduct.content}</p>
                     <button
                         onClick = {() => {this.handleClick (singleProduct.id)}}
@@ -43,6 +51,7 @@ SingleProduct.propTypes = {
         id: PropTypes.string,
         title: PropTypes.string,
         content: PropTypes.string,
+        oldPrice: PropTypes.string,
         price: PropTypes.string,
         feature: PropTypes.string,
     }),

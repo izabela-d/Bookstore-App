@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Col } from "reactstrap";
 import './ProductSummary.scss';
+import Currency from "../../common/Currency/Currency";
 
 const ProductsSummary = ({ id, title, oldPrice, price, feature }) => (
     <Col xs={6} key={id} className={'product-container'}>
@@ -12,7 +13,14 @@ const ProductsSummary = ({ id, title, oldPrice, price, feature }) => (
                 <div className={'label-product'}>
                     <p>{ feature }</p>
                     <p>{ title }</p>
-                    <p><span className={'old-price'}>{ oldPrice }</span>{ price }</p>
+                    <p>
+                        {oldPrice &&
+                        <span className={'old-price'}>
+                            <Currency value={oldPrice}/>
+                        </span>
+                        }
+                        <Currency value={price}/>
+                    </p>
                 </div>
             </div>
         </Link>

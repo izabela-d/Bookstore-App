@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
+import Currency from "../../common/Currency/Currency";
 
 class CartProduct extends React.Component {
     render() {
@@ -19,7 +20,7 @@ class CartProduct extends React.Component {
                 </div>
                 <div className="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
                     <div className="col-3 col-sm-3 col-md-6 text-md-right">
-                        <h6><strong>{price} <span className="text-muted">x</span></strong></h6>
+                        <h6><strong><Currency value={ price }/><span className="text-muted">x</span></strong></h6>
                     </div>
                     <div className="col-4 col-sm-4 col-md-4">
                         <div className="quantity">
