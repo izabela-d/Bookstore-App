@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { API_URL } from '../config';
 
+/* CONSTS */
+export const PRODUCTS_PER_PAGE = 10;
+
 /* SELECTORS */
 export const getProducts = ({ products }) => products.data;
 export const getSingleProduct = ({ products }) => products.singleProduct;
@@ -11,7 +14,7 @@ export const getTotalPrice = ({ products }) => {
             return sum + (product.quantity * product.price);
         }, 0)
 };
-export const getPages = ({ products }) => Math.ceil(products.amount / products.productsPerPage);
+export const getPages = ({ products }) => Math.ceil(products.amount / PRODUCTS_PER_PAGE);
 export const getSummary = ( { products }) => products.summary;
 export const getSortBy = ({ products }) => products.sortBy;
 export const getDirection = ({ products }) => products.direction;
@@ -54,7 +57,6 @@ const initialState = {
         { id: 'id9', title: 'producti', quantity: 10, content: 'content 3', price: '14.00'}
     ],
     amount: 0,
-    productsPerPage: 10,
     presentPage: 1,
     sortBy: 'title',
     direction: 'asc',
@@ -65,17 +67,16 @@ const initialState = {
 };
 
 /* THUNKS */
-export const loadProductsByPageRequest = (page, productsPerPage, sortBy = 'title', direction = 'asc') => {
+export const loadProductsByPageRequest = (page, sortBy = 'title', direction = 'asc') => {
     return async dispatch => {
 
-        const startAt = (page - 1) * productsPerPage;
+        const startAt = (page - 1) * PRODUCTS_PER_PAGE;
 
-        let res = await axios.get(`${API_URL}/products/range/${startAt}/${productsPerPage}?sortBy=${sortBy}&direction=${direction}`);
+        let res = await axios.get(`${API_URL}/products/range/${startAt}/${PRODUCTS_PER_PAGE}?sortBy=${sortBy}&direction=${direction}`);
 
         const payload = {
             products: res.data.products,
             amount: res.data.amount,
-            productsPerPage,
             presentPage: page,
             sortBy,
             direction,
@@ -109,7 +110,6 @@ export default function reducer(statePart = initialState, action = {}) {
         case LOAD_PRODUCTS:
             return {
                 ...statePart,
-                productsPerPage: action.payload.productsPerPage,
                 presentPage: action.payload.presentPage,
                 amount: action.payload.amount,
                 data: [...action.payload.products],

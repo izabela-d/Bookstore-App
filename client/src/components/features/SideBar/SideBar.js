@@ -4,8 +4,8 @@ import { ListGroup } from "reactstrap";
 
 const SideBar = (props) =>  {
 
-    const handleOnClick = (key, direction) => {
-        props.sort(1, 10, key, direction);
+    const handleOnClick = (sortBy, direction) => {
+        props.sort(props.initialPage, sortBy, direction);
     };
 
     return (
@@ -25,14 +25,10 @@ const SideBar = (props) =>  {
 
 SideBar.propTypes = {
     sort: PropTypes.func.isRequired,
-    productsPerPage: PropTypes.number,
 };
-
 
 SideBar.defaultProps = {
     initialPage: 1,
-    productsPerPage: 10,
 };
-
 
 export default SideBar;

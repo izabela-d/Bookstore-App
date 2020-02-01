@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadProductsByPage: (page, postsPerPage, sortBy, direction) => dispatch(loadProductsByPageRequest(page, postsPerPage, sortBy, direction)),
+    loadProductsByPage: (page, sortBy, direction) => dispatch(loadProductsByPageRequest(page, sortBy, direction)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
