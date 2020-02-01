@@ -50,6 +50,7 @@ Products.propTypes = {
             title: PropTypes.string.isRequired,
             content: PropTypes.string.isRequired,
             price: PropTypes.string.isRequired,
+            feature: PropTypes.string,
         })
     ),
     productsPerPage: PropTypes.number,

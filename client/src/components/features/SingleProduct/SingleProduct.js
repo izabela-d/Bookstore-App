@@ -22,6 +22,7 @@ class SingleProduct extends React.Component {
             <div>
                 Single Product
                 <div>
+                    <p>{singleProduct.feature}</p>
                     <p>{singleProduct.title}</p>
                     <p>{singleProduct.price}</p>
                     <p>{singleProduct.content}</p>
@@ -43,6 +44,7 @@ SingleProduct.propTypes = {
         title: PropTypes.string,
         content: PropTypes.string,
         price: PropTypes.string,
+        feature: PropTypes.string,
     }),
     loadSingleProduct: PropTypes.func.isRequired,
     addProductToCart: PropTypes.func.isRequired,
