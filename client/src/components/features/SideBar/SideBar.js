@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ListGroup } from "reactstrap";
+import Button from "../../common/Button/Button";
 
 class SideBar extends React.Component {
 
@@ -31,21 +32,21 @@ class SideBar extends React.Component {
     render() {
         return (
             <div>
-                <h3>Sort:</h3>
+                <h5>Sort:</h5>
                 <ListGroup>
-                    <button onClick={() => this.handleSort('title', 'desc')}>By title desc</button>
-                    <button onClick={() => this.handleSort('title', 'asc')}>By title asc</button>
-                    <button onClick={() => this.handleSort('price', 'desc')}>By price desc</button>
-                    <button onClick={() => this.handleSort('price', 'asc')}>By price asc</button>
+                    <Button variant={'primary'} onClick={() => this.handleSort('title', 'desc')}>By title desc</Button>
+                    <Button variant={'primary'} onClick={() => this.handleSort('title', 'asc')}>By title asc</Button>
+                    <Button variant={'primary'} onClick={() => this.handleSort('price', 'desc')}>By price desc</Button>
+                    <Button variant={'primary'} onClick={() => this.handleSort('price', 'asc')}>By price asc</Button>
                 </ListGroup>
-                <h3>Find:</h3>
+                <h5>Find:</h5>
                 <ListGroup>
                     <input
                         type={'text'}
                         value={this.state.search}
                         onChange={this.handleSearchChange}
                     />
-                    <button onClick={() => this.handleFind('title', 'desc')}>Search</button>
+                    <Button variant={'primary'} onClick={() => this.handleFind('title', 'desc')}>Search</Button>
                 </ListGroup>
             </div>
         );

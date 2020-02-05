@@ -1,5 +1,6 @@
 $color-text: #333;
-$color-text-light: #666;
+$color-text-light: #5F5F5F;
+$color-text-button-primary: #19334d;
 $color-text-bright: #fff;
 $color-primary: #3498db;
 $color-secondary: #218c74;
@@ -26,6 +27,7 @@ $font-text: 'Source Sans Pro', sans-serif;
 $radius: 5px;
 $base-size: 14px;
 $transition: all 0.5s;
+$button-size: 15px;
 
 @mixin p-el($element) {
   &:#{$element}, &::#{$element} {
