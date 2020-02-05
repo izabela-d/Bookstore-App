@@ -5,16 +5,23 @@
   flex-wrap: wrap;
   list-style-type: none;
   padding: 0;
+  margin: 0;
 
   li {
     margin: 0 $base-size;
 
     a {
       text-decoration: none;
+      color: gray;
 
       &.active {
-        color: black;
+        color: #FFF;
       }
+
+      i {
+        margin-left: 5px;
+      }
+
     }
   }
 
