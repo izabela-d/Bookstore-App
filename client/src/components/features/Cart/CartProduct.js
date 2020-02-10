@@ -20,7 +20,7 @@ class CartProduct extends React.Component {
                         <Image image={ image }/>
                     </Col>
                     <Col  sm={'4'}>
-                        <h4 className="product-name">
+                        <h4>
                             <strong>{ title }</strong>
                         </h4>
                         <h4>
@@ -71,7 +71,7 @@ class CartProduct extends React.Component {
                             <Col  sm={'3'}>
                                 <Button
                                     onClick={() => onRemoveProduct(id)}
-                                    color="secondary"
+                                    color={'secondary'}
                                 >
                                     <FontAwesomeIcon icon={ faTrash } />
                                 </Button>

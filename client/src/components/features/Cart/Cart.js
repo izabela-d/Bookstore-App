@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import CartProduct from './CartProduct';
+import PageTitle from "../../common/PageTitle/PageTitle";
 
 class Cart extends React.Component {
 
@@ -25,7 +26,7 @@ class Cart extends React.Component {
 
         return (
             <div className="card-body">
-                <h1>Cart</h1>
+                <PageTitle>Cart</PageTitle>
                 {cartProducts.map((product, index) => {
                     return <CartProduct
                         key={product.id}
