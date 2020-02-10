@@ -14,7 +14,7 @@ class CartProduct extends React.Component {
         const { id, image, title, price, content, quantity, onRemoveProduct, onQtyChange } = this.props;
 
         return (
-            <div>
+            <div className={'cart-container'}>
                 <Row>
                     <Col sm={'2'} >
                         <Image image={ image }/>
@@ -71,7 +71,7 @@ class CartProduct extends React.Component {
                             <Col  sm={'3'}>
                                 <Button
                                     onClick={() => onRemoveProduct(id)}
-                                    color={'secondary'}
+                                    color={'warning'}
                                 >
                                     <FontAwesomeIcon icon={ faTrash } />
                                 </Button>
