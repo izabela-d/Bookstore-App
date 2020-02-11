@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListGroup } from "reactstrap";
-import Button from "../../common/Button/Button";
+import { ListGroup, Button, ButtonToggle, Input } from 'reactstrap';
 
 class SideBar extends React.Component {
 
@@ -34,19 +33,44 @@ class SideBar extends React.Component {
             <div>
                 <h5>Sort:</h5>
                 <ListGroup>
-                    <Button variant={'primary'} onClick={() => this.handleSort('title', 'desc')}>By title desc</Button>
-                    <Button variant={'primary'} onClick={() => this.handleSort('title', 'asc')}>By title asc</Button>
-                    <Button variant={'primary'} onClick={() => this.handleSort('price', 'desc')}>By price desc</Button>
-                    <Button variant={'primary'} onClick={() => this.handleSort('price', 'asc')}>By price asc</Button>
+                    <ButtonToggle
+                        color={'success'}
+                        onClick={() => this.handleSort('title', 'desc')}
+                    >
+                        By title desc
+                    </ButtonToggle>
+                    <ButtonToggle
+                        color={'success'}
+                        onClick={() => this.handleSort('title', 'asc')}
+                    >
+                        By title asc
+                    </ButtonToggle>
+                    <ButtonToggle
+                        color={'success'}
+                        onClick={() => this.handleSort('price', 'desc')}
+                    >
+                        By price desc
+                    </ButtonToggle>
+                    <ButtonToggle
+                        color={'success'}
+                        onClick={() => this.handleSort('price', 'asc')}
+                    >
+                        By price asc
+                    </ButtonToggle>
                 </ListGroup>
                 <h5>Find:</h5>
                 <ListGroup>
-                    <input
+                    <Input
                         type={'text'}
                         value={this.state.search}
                         onChange={this.handleSearchChange}
                     />
-                    <Button variant={'primary'} onClick={() => this.handleFind('title', 'desc')}>Search</Button>
+                    <Button
+                        color={'warning'}
+                        onClick={() => this.handleFind('title', 'desc')}
+                    >
+                        Search
+                    </Button>
                 </ListGroup>
             </div>
         );
