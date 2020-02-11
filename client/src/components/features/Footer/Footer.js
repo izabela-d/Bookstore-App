@@ -1,11 +1,12 @@
 import React from 'react';
+import './Footer.scss';
 
 class Footer extends React.Component {
 
     render() {
         return (
-            <div>
-                test
+            <div className={'footer'}>
+                Bookstore-App @Izabela Depa
             </div>
         );
     }
