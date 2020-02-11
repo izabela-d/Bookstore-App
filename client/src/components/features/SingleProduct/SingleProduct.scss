@@ -1,0 +1,25 @@
+.single-product-container {
+  text-align: center;
+  padding-top: 10px;
+
+  .image {
+    max-width:250px;
+    height:auto;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 10px 5px;
+  }
+
+  .old-price {
+    text-decoration: line-through;
+  }
+
+  .price {
+    font-weight: bold;
+  }
+
+}

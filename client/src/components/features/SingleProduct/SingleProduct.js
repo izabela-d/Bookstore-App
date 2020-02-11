@@ -1,8 +1,10 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { withRouter } from "react-router-dom";
+import { Button } from 'reactstrap';
 import Currency from "../../common/Currency/Currency";
 import Image from "../../common/Image/Image";
+import './SingleProduct.scss';
 
 class SingleProduct extends React.Component {
 
@@ -21,28 +23,30 @@ class SingleProduct extends React.Component {
         const { singleProduct } = this.props;
 
         return (
-            <div>
-                Single Product
-                <div>
-                    <Image image={singleProduct.image}/>
-                    <p>{singleProduct.feature}</p>
-                    <p>{singleProduct.title}</p>
-                    {singleProduct.oldPrice &&
-                    <span className={'old-price'}>
-                            <Currency value={singleProduct.oldPrice}/>
-                        </span>
-                    }
-                    <p>
-                        <Currency value={singleProduct.price}/>
-                    </p>
-                    <p>{singleProduct.content}</p>
-                    <button
-                        onClick = {() => {this.handleClick (singleProduct.id)}}
-                        type="button"
-                        className="btn btn-outline-danger btn-xs">
-                        Add product
-                    </button>
-                </div>
+            <div className={'single-product-container'}>
+                <Image image={singleProduct.image}/>
+                <br />
+                <Button
+                    outline color={'info'}
+                >
+                    {singleProduct.feature}
+                </Button>
+                <p className={'title'}>{singleProduct.title}</p>
+                {singleProduct.oldPrice &&
+                <span className={'old-price'}>
+                    <Currency value={singleProduct.oldPrice}/>
+                </span>
+                }
+                <p className={'price'}>
+                    <Currency value={singleProduct.price}/>
+                </p>
+                <p>{singleProduct.content}</p>
+                <Button
+                    onClick = {() => {this.handleClick (singleProduct.id)}}
+                    color={'success'}
+                >
+                    Add product
+                </Button>
             </div>
         );
     }
