@@ -1,39 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { Table } from 'reactstrap';
 import Currency from "../../common/Currency/Currency";
+import PageTitle from "../../common/PageTitle/PageTitle";
+import './Summary.scss';
 
 class Summary extends React.Component {
     render() {
         const { summary } = this.props;
 
         return (
-            <div className="card-summary">
-                <h1>Summary</h1>
+            <div>
+                <PageTitle>Summary</PageTitle>
 
-                <table className="table">
+                <Table>
                     <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
                     </thead>
                     <tbody>
                     {summary.items.map( item => {
                        return (
-                           <tr key={item.id}>
+                           <tr key={ item.id }>
                                <td>
-                                   {item.title}
+                                   { item.title }
                                </td>
                                <td>
-                                   {item.quantity}
+                                   { item.quantity }
                                </td>
                                <td>
-                                   <Currency value={item.price}/>
+                                   <Currency value={ item.price } />
                                </td>
                            </tr>
                        )
                     })}
                     </tbody>
-                </table>
-                <div>
-                    Order total: {summary.sum}
+                </Table>
+                <div className={'order-total'}>
+                    Order total: { summary.sum }
                 </div>
             </div>
         );
