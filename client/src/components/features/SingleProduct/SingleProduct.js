@@ -26,11 +26,13 @@ class SingleProduct extends React.Component {
             <div className={'single-product-container'}>
                 <Image image={singleProduct.image}/>
                 <br />
+                {singleProduct.feature &&
                 <Button
                     outline color={'info'}
                 >
                     {singleProduct.feature}
                 </Button>
+                }
                 <p className={'title'}>{singleProduct.title}</p>
                 {singleProduct.oldPrice &&
                 <span className={'old-price'}>

@@ -5,15 +5,40 @@ import { Col } from "reactstrap";
 import './ProductSummary.scss';
 import Currency from "../../common/Currency/Currency";
 import Image from "../../common/Image/Image";
+import { Button } from 'reactstrap';
 
 const ProductsSummary = ({ id, title, oldPrice, price, feature, image }) => (
-    <Col xs={6} key={id} className={'product-container'}>
+
+    <Col xs={12} md={6} lg={4} xl={3} key={id} className={'product-container'}>
         <Link to={`/${id}`}>
             <div className={'product-box'}>
                 <Image image={image}/>
                 <div className={'label-product'}>
-                    <p>{ feature }</p>
-                    <p>{ title }</p>
+                    <br />
+
+                    {feature==='promotion' &&
+                    <Button
+                        outline color={'danger'}
+                    >
+                        {feature}
+                    </Button>
+                    }
+                    {feature==='best' &&
+                    <Button
+                        outline color={'warning'}
+                    >
+                        {feature}
+                    </Button>
+                    }
+                    {feature==='new' &&
+                    <Button
+                        outline color={'info'}
+                    >
+                        {feature}
+                    </Button>
+                    }
+
+                    <p className={'title'}>{ title }</p>
                     <p>
                         {oldPrice &&
                         <span className={'old-price'}>
@@ -26,6 +51,7 @@ const ProductsSummary = ({ id, title, oldPrice, price, feature, image }) => (
             </div>
         </Link>
     </Col>
+
 );
 
 ProductsSummary.propTypes = {

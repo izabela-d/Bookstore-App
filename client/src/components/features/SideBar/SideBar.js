@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ListGroup, Button, ButtonToggle, Input } from 'reactstrap';
+import './SideBar.scss';
 
 class SideBar extends React.Component {
 
@@ -31,34 +32,34 @@ class SideBar extends React.Component {
     render() {
         return (
             <div>
-                <h5>Sort:</h5>
+                <h5 className={'sort'}>Sort:</h5>
                 <ListGroup>
                     <ButtonToggle
-                        color={'success'}
+                        color={'secondary'}
                         onClick={() => this.handleSort('title', 'desc')}
                     >
                         By title desc
                     </ButtonToggle>
                     <ButtonToggle
-                        color={'success'}
+                        color={'secondary'}
                         onClick={() => this.handleSort('title', 'asc')}
                     >
                         By title asc
                     </ButtonToggle>
                     <ButtonToggle
-                        color={'success'}
+                        color={'secondary'}
                         onClick={() => this.handleSort('price', 'desc')}
                     >
                         By price desc
                     </ButtonToggle>
                     <ButtonToggle
-                        color={'success'}
+                        color={'secondary'}
                         onClick={() => this.handleSort('price', 'asc')}
                     >
                         By price asc
                     </ButtonToggle>
                 </ListGroup>
-                <h5>Find:</h5>
+                <h5 className={'find'}>Find:</h5>
                 <ListGroup>
                     <Input
                         type={'text'}

@@ -6,10 +6,10 @@ import SideBar from '../../features/SideBar/SideBarContainer'
 const HomePage = () => (
     <Container>
         <Row>
-            <Col xs={3}>
+            <Col xs={4} md={3}>
                 <SideBar />
             </Col>
-            <Col xs={9}>
+            <Col xs={8} md={9}>
                 <Products/>
             </Col>
         </Row>
