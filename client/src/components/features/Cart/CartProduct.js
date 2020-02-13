@@ -16,10 +16,10 @@ class CartProduct extends React.Component {
         return (
             <div className={'cart-container'}>
                 <Row>
-                    <Col sm={'2'} >
+                    <Col sm={'3'} md={'2'} >
                         <Image image={ image }/>
                     </Col>
-                    <Col  sm={'4'}>
+                    <Col  sm={'3'} md={'4'}>
                         <h4>
                             <strong>{ title }</strong>
                         </h4>
