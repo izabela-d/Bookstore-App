@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 import './Pagination.scss';
 
-class Pagination extends React.Component {
+class Paginations extends React.Component {
 
     changePage = (newPage) => {
         const { onPageChange } = this.props;
@@ -18,43 +19,49 @@ class Pagination extends React.Component {
         const { changePage } = this;
 
         return (
-            <div className="pagination">
-                <ul className="pagination__list">
+            <Pagination aria-label="Page navigation example">
 
                     {presentPage > 1 &&
-                    <li
-                        onClick={() => { changePage(presentPage -1)}}>
-                        <FontAwesomeIcon icon={faChevronLeft} />
-                    </li>
+                    <PaginationItem>
+                        <PaginationLink
+                            previous href="#"
+                            onClick={() => { changePage(presentPage -1)}}
+                            />
+                    </PaginationItem>
                     }
 
                     {[...Array(pages)].map((el, page) =>
-                        <li
+                        <PaginationItem
                             key={++page}
-                            onClick={() => { changePage(page) }}
-                            className={`pagination__list__item${((page) === presentPage) ? ' pagination__list__item--active' : ''}`}>
-                            {page}
-                        </li>
+                            active={page === presentPage}
+                        >
+                            <PaginationLink
+                                onClick={() => { changePage(page) }}
+                            >
+                                {page}
+                            </PaginationLink>
+                        </PaginationItem>
                     )}
 
                     {presentPage < pages &&
-                    <li
-                        onClick={() => { changePage(presentPage +1)}}>
-                        <FontAwesomeIcon icon={faChevronRight} />
-                    </li>
+                    <PaginationItem>
+                        <PaginationLink
+                            next href="#"
+                            onClick={() => { changePage(presentPage +1)}}
+                        />
+                    </PaginationItem>
                     }
 
-                </ul>
-            </div>
+            </Pagination>
         );
     }
 
 }
 
-Pagination.propTypes = {
+Paginations.propTypes = {
     pages: PropTypes.number.isRequired,
     presentPage: PropTypes.number,
     onPageChange: PropTypes.func.isRequired,
 };
 
-export default Pagination;
+export default Paginations;
