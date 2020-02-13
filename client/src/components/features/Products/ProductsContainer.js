@@ -5,7 +5,7 @@ import {
     loadProductsByPageRequest,
     getSortBy,
     getDirection,
-    getSearch
+    getSearch, isLoading, isError
 } from '../../../redux/productsRedux';
 import Products from './Products';
 
@@ -15,6 +15,8 @@ const mapStateToProps = state => ({
     sortBy: getSortBy(state),
     direction: getDirection(state),
     search: getSearch(state),
+    isLoading: isLoading(state),
+    isError: isError(state),
 });
 
 const mapDispatchToProps = dispatch => ({

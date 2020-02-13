@@ -1,7 +1,9 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+import { Alert } from 'reactstrap';
 import Pagination from '../../common/Pagination/Pagination';
-import ProductsList from "../ProductsList/ProductsList";
+import ProductsList from '../ProductsList/ProductsList';
+import Spinner from '../../common/Spinner/Spinner';
 
 class Products extends React.Component {
 
@@ -27,19 +29,43 @@ class Products extends React.Component {
         const { loadProductPage } = this;
         const { presentPage } = this.state;
 
+        if (this.props.isError) {
+            return (
+                <div>
+                    <Alert color={'error'}>error</Alert>
+                </div>
+            )
+        }
+
+        if (this.props.isLoading) {
+            return (
+                <div>
+                    <Spinner />
+                </div>
+            )
+        }
+
+        if (products.length > 0) {
+            return (
+                <div>
+                    <ProductsList products={products}/>
+
+                    {pagination &&
+                    <Pagination
+                        presentPage={presentPage}
+                        pages={pages}
+                        onPageChange={loadProductPage}
+                    />
+                    }
+                </div>
+            )
+        }
+
         return (
             <div>
-                <ProductsList products={products} />
-
-                {pagination &&
-                <Pagination
-                    presentPage={presentPage}
-                    pages={pages}
-                    onPageChange={loadProductPage}
-                />
-                }
+                <Alert color={'info'}>No products!</Alert>
             </div>
-        );
+        )
     }
 }
 

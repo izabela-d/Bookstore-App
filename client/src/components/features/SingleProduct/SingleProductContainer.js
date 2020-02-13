@@ -1,9 +1,16 @@
 import { connect } from 'react-redux';
-import { getSingleProduct, loadSingleProductRequest,addProductToCart } from '../../../redux/productsRedux';
+import {
+    getSingleProduct,
+    loadSingleProductRequest,
+    addProductToCart,
+    isLoading, isError
+} from '../../../redux/productsRedux';
 import SingleProduct from './SingleProduct';
 
 const mapStateToProps = state => ({
     singleProduct: getSingleProduct(state),
+    isLoading: isLoading(state),
+    isError: isError(state),
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import CartProduct from './CartProduct';
 import PageTitle from "../../common/PageTitle/PageTitle";
-import { Row, Col, Input, Button } from 'reactstrap';
+import { Row, Col, Input, Button, Alert } from 'reactstrap';
 import './Cart.scss';
 import Currency from "../../common/Currency/Currency";
+import Spinner from '../../common/Spinner/Spinner';
 
 class Cart extends React.Component {
 
@@ -27,38 +28,57 @@ class Cart extends React.Component {
     render() {
         const {cartProducts, totalPrice, changeQty, removeCartProduct } = this.props;
 
-        return (
-            <div>
-                <PageTitle>Cart</PageTitle>
+        if (this.props.isError) {
+            return (
                 <div>
-                    {cartProducts.map((product) => {
-                        return <CartProduct
-                            key={product.id}
-                            id={product.id}
-                            image={product.image}
-                            title={product.title}
-                            price={product.price}
-                            content={product.content}
-                            quantity={product.quantity}
-                            stockCount={product.stockCount}
-                            onQtyChange={(id, quantity) => changeQty(id, quantity)}
-                            onRemoveProduct={(id) => removeCartProduct(id)}
-                        />
-                    })}
+                    <Alert color={'error'}>error</Alert>
                 </div>
-                <div className={'checkout'}>
-                    <div className={'panel-bar'} />
+            )
+        }
+
+        if (this.props.isLoading) {
+            return (
+                <div>
+                    <Spinner />
+                </div>
+            )
+        }
+
+        if (cartProducts.length > 0) {
+            return (
+                <div>
+                    <PageTitle>Cart</PageTitle>
+                    <div>
+                        {cartProducts.map((product) => {
+                            return <CartProduct
+                                key={product.id}
+                                id={product.id}
+                                image={product.image}
+                                title={product.title}
+                                price={product.price}
+                                content={product.content}
+                                quantity={product.quantity}
+                                stockCount={product.stockCount}
+                                onQtyChange={(id, quantity) => changeQty(id, quantity)}
+                                onRemoveProduct={(id) => removeCartProduct(id)}
+                            />
+                        })}
+                    </div>
+                    <div className={'checkout'}>
+                        <div className={'panel-bar'}/>
                         <Row>
                             <Col>
                                 <Input
                                     type={'text'}
                                     placeholder={'cupone code'}
-                                    onChange={ this.handleCouponCode }
+                                    onChange={this.handleCouponCode}
                                 />
                             </Col>
                             <Col>
                                 <Link to="/summary"
-                                      onClick = {() => {this.handleClick ()}}
+                                      onClick={() => {
+                                          this.handleClick()
+                                      }}
                                 >
                                     <Button
                                         color={'success'}
@@ -68,14 +88,21 @@ class Cart extends React.Component {
                                 </Link>
                             </Col>
                             <Col>
-                                <div className="pull-right" >
-                                    Total price: <b><Currency value={ totalPrice }/></b>
+                                <div className="pull-right">
+                                    Total price: <b><Currency value={totalPrice}/></b>
                                 </div>
                             </Col>
                         </Row>
+                    </div>
                 </div>
+            )
+        }
+
+        return (
+            <div>
+                <Alert color={'info'}>No products!</Alert>
             </div>
-        );
+        )
     }
 }
 
