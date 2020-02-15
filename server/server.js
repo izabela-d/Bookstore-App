@@ -3,6 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const config = require('./config');
 const mongoose = require('mongoose');
+const path = require('path');
 const loadTestData = require('./testData');
 
 const app = express();
@@ -19,8 +20,20 @@ app.use('/api/products', productRoutes);
 app.use('/api/checkout', checkoutRoutes);
 app.use(helmet());
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '/../client/build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../client/build/index.html'));
+});
+
 // connects our back end code with the database
-mongoose.connect(config.DB, { useNewUrlParser: true });
+mongoose.connect(config.DB, {
+    useNewUrlParser: true,
+    user: config.MONGO_USER,
+    pass: config.MONGO_PASS,
+});
+
 let db = mongoose.connection;
 
 db.once('open', () => {
