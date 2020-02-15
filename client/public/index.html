@@ -62,5 +62,13 @@
       firebase.initializeApp(firebaseConfig);
       firebase.analytics();
     </script>
+    <script>
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('%PUBLIC_URL%/sw.js')
+                .then(function () {
+                    console.log('Service Worker Registered');
+                });
+        }
+    </script>
   </body>
 </html>
