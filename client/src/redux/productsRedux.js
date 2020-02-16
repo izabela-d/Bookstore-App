@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_URL } from '../config';
 
 /* CONSTS */
-export const PRODUCTS_PER_PAGE = 10;
+export const PRODUCTS_PER_PAGE = 12;
 
 /* SELECTORS */
 export const getProducts = ({ products }) => products.data;
