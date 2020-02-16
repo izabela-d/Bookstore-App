@@ -22,6 +22,7 @@ exports.checkout = async (req, res) => {
         items.push({
             id: product.id,
             title: product.title,
+            author: product.author,
             quantity: cartProduct.quantity,
             price: product.price,
         })

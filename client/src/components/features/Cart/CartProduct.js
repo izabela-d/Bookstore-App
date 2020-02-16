@@ -11,7 +11,7 @@ import './CartProduct.scss';
 class CartProduct extends React.Component {
     render() {
 
-        const { id, image, title, price, content, quantity, onRemoveProduct, onQtyChange } = this.props;
+        const { id, image, title, author, price, quantity, onRemoveProduct, onQtyChange } = this.props;
 
         return (
             <div className={'cart-container'}>
@@ -24,7 +24,7 @@ class CartProduct extends React.Component {
                             <strong>{ title }</strong>
                         </h4>
                         <h4>
-                            <small>{ content }</small>
+                            { author }
                         </h4>
                     </Col>
                     <Col  sm={'6'}>
@@ -88,6 +88,7 @@ CartProduct.propTypes = {
     id: PropTypes.string,
     image: PropTypes.string,
     title: PropTypes.string,
+    author: PropTypes.string,
     price: PropTypes.string,
     count: PropTypes.number,
     content: PropTypes.string,

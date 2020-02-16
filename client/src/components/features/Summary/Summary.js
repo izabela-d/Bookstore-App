@@ -35,6 +35,7 @@ class Summary extends React.Component {
                     <thead>
                     <tr>
                         <th>Title</th>
+                        <th>Author</th>
                         <th>Quantity</th>
                         <th>Price</th>
                     </tr>
@@ -45,6 +46,9 @@ class Summary extends React.Component {
                             <tr key={item.id}>
                                 <td>
                                     {item.title}
+                                </td>
+                                <td>
+                                    {item.author}
                                 </td>
                                 <td>
                                     {item.quantity}
@@ -75,6 +79,7 @@ Summary.propTypes = {
         PropTypes.shape({
             id: PropTypes.string,
             title: PropTypes.string,
+            author: PropTypes.string,
             content: PropTypes.string,
             price: PropTypes.string,
             quantity: PropTypes.number,

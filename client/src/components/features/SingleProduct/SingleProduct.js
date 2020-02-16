@@ -52,15 +52,15 @@ class SingleProduct extends React.Component {
                     </Button>
                     }
                     <p className={'title'}>{singleProduct.title}</p>
+                    <p>{ singleProduct.author }</p>
                     {singleProduct.oldPrice &&
                     <span className={'old-price'}>
-                    <Currency value={singleProduct.oldPrice}/>
-                </span>
+                        <Currency value={singleProduct.oldPrice}/>
+                    </span>
                     }
                     <p className={'price'}>
                         <Currency value={singleProduct.price}/>
                     </p>
-                    <p>{singleProduct.content}</p>
                     <Button
                         onClick={() => {
                             this.handleClick(singleProduct.id)
@@ -69,6 +69,7 @@ class SingleProduct extends React.Component {
                     >
                         Add product
                     </Button>
+                    <p>{singleProduct.content}</p>
                 </div>
             )
         }
@@ -86,6 +87,7 @@ SingleProduct.propTypes = {
         id: PropTypes.string,
         image: PropTypes.string,
         title: PropTypes.string,
+        author: PropTypes.string,
         content: PropTypes.string,
         oldPrice: PropTypes.string,
         price: PropTypes.string,

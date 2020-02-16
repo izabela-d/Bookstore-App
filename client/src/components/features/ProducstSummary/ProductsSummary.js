@@ -7,7 +7,7 @@ import Currency from "../../common/Currency/Currency";
 import Image from "../../common/Image/Image";
 import { Button } from 'reactstrap';
 
-const ProductsSummary = ({ id, title, oldPrice, price, feature, image }) => (
+const ProductsSummary = ({ id, title, author, oldPrice, price, feature, image }) => (
 
     <Col xs={12} md={6} lg={4} xl={3} key={id} className={'product-container'}>
         <Link to={`/${id}`}>
@@ -39,6 +39,7 @@ const ProductsSummary = ({ id, title, oldPrice, price, feature, image }) => (
                     }
 
                     <p className={'title'}>{ title }</p>
+                    <p>{ author }</p>
                     <p>
                         {oldPrice &&
                         <span className={'old-price'}>
@@ -58,6 +59,7 @@ ProductsSummary.propTypes = {
     id: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     oldPrice: PropTypes.string,
     feature: PropTypes.string,

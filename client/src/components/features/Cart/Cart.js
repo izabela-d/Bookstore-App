@@ -55,6 +55,7 @@ class Cart extends React.Component {
                                 id={product.id}
                                 image={product.image}
                                 title={product.title}
+                                author={product.author}
                                 price={product.price}
                                 content={product.content}
                                 quantity={product.quantity}
@@ -112,6 +113,7 @@ Cart.propTypes = {
             id: PropTypes.string,
             image: PropTypes.string,
             title: PropTypes.string,
+            author: PropTypes.string,
             content: PropTypes.string,
             price: PropTypes.string,
             quantity: PropTypes.number,

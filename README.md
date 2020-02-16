@@ -15,7 +15,7 @@ Using command `yarn start`.
 Todo:  
 
 - [x] logo
-- [ ] zdjecia
+- [x] zdjecia
 - [x] ikona
 - [x] spinner
 - [ ] eslint
