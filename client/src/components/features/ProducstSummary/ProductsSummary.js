@@ -38,8 +38,8 @@ const ProductsSummary = ({ id, title, author, oldPrice, price, feature, image })
                     </Button>
                     }
 
-                    <p className={'title'}>{ title }</p>
-                    <p>{ author }</p>
+                    <p>Title: <span className={'title'}>{ title }</span></p>
+                    <p>Author: { author }</p>
                     <p>
                         {oldPrice &&
                         <span className={'old-price'}>

@@ -51,8 +51,8 @@ class SingleProduct extends React.Component {
                         {singleProduct.feature}
                     </Button>
                     }
-                    <p className={'title'}>{singleProduct.title}</p>
-                    <p>{ singleProduct.author }</p>
+                    <p>Title: <span className={'title'}>{singleProduct.title}</span></p>
+                    <p>Author: { singleProduct.author }</p>
                     {singleProduct.oldPrice &&
                     <span className={'old-price'}>
                         <Currency value={singleProduct.oldPrice}/>
