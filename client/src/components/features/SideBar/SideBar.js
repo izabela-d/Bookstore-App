@@ -48,6 +48,18 @@ class SideBar extends React.Component {
                     </ButtonToggle>
                     <ButtonToggle
                         color={'secondary'}
+                        onClick={() => this.handleSort('author', 'desc')}
+                    >
+                        By author desc
+                    </ButtonToggle>
+                    <ButtonToggle
+                        color={'secondary'}
+                        onClick={() => this.handleSort('author', 'asc')}
+                    >
+                        By author asc
+                    </ButtonToggle>
+                    <ButtonToggle
+                        color={'secondary'}
                         onClick={() => this.handleSort('price', 'desc')}
                     >
                         By price desc
@@ -68,7 +80,7 @@ class SideBar extends React.Component {
                     />
                     <Button
                         color={'warning'}
-                        onClick={() => this.handleFind('title', 'desc')}
+                        onClick={() => this.handleFind()}
                     >
                         Search
                     </Button>

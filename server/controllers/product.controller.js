@@ -27,7 +27,13 @@ exports.getProductsByRange = async function (req, res) {
 
         let query = {};
         if (search) {
-            query = { title: { $regex: search, $options: 'i' } }
+            query = {
+                $or:
+                    [
+                        { title: { $regex: search, $options: 'i' } },
+                        { author: { $regex: search, $options: 'i' } }
+                    ]
+            };
         }
 
         startAt = parseInt(startAt);
