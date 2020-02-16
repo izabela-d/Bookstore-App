@@ -20,9 +20,9 @@ ProductsList.propTypes = {
             title: PropTypes.string.isRequired,
             author: PropTypes.string.isRequired,
             content: PropTypes.string.isRequired,
-            feature: PropTypes.string,
+            feature: PropTypes.string
         })
-    ),
+    )
 };
 
 export default ProductsList;

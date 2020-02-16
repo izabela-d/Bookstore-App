@@ -1,5 +1,5 @@
 import React from 'react';
-import Summary from "../../features/Summary/SummaryContainer";
+import Summary from '../../features/Summary/SummaryContainer';
 
 const SummaryPage = () => (
     <div>

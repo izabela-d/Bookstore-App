@@ -10,7 +10,7 @@ const PageTitle = ({ children }) => (
 );
 
 PageTitle.propTypes = {
-    children: PropTypes.string,
+    children: PropTypes.string
 };
 
 export default PageTitle;

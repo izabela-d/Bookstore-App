@@ -7,18 +7,18 @@ export const PRODUCTS_PER_PAGE = 12;
 /* SELECTORS */
 export const getProducts = ({ products }) => products.data;
 export const getRequest = ({ products }) => products.request;
-export const isLoading = (state) => true === getRequest(state).pending && false !== getRequest(state).error;
-export const isError = (state) => true === getRequest(state).error;
+export const isLoading = (state) => getRequest(state).pending === true && getRequest(state).error !== false;
+export const isError = (state) => getRequest(state).error === true;
 export const getSingleProduct = ({ products }) => products.singleProduct;
 export const getCartProducts = ({ products }) => products.cartProducts;
 export const getTotalPrice = ({ products }) => {
     return products.cartProducts
         .reduce((sum, product) => {
             return sum + (product.quantity * product.price);
-        }, 0)
+        }, 0);
 };
 export const getPages = ({ products }) => Math.ceil(products.amount / PRODUCTS_PER_PAGE);
-export const getSummary = ( { products }) => products.summary;
+export const getSummary = ({ products }) => products.summary;
 export const getSortBy = ({ products }) => products.sortBy;
 export const getDirection = ({ products }) => products.direction;
 export const getSearch = ({ products }) => products.search;
@@ -43,17 +43,17 @@ export const RESET_REQUEST = createActionName('RESET_REQUEST');
 export const startRequest = () => ({ type: START_REQUEST });
 export const loadProductsByPage = payload => ({ payload, type: LOAD_PRODUCTS });
 export const loadSingleProduct = payload => ({ payload, type: LOAD_SINGLE_PRODUCT });
-export const addProductToCart = payload => ({ payload, type: ADD_PRODUCT});
-export const removeCartProduct =  payload => ({ payload, type: REMOVE_CART_PRODUCT });
+export const addProductToCart = payload => ({ payload, type: ADD_PRODUCT });
+export const removeCartProduct = payload => ({ payload, type: REMOVE_CART_PRODUCT });
 export const changeQty = (id, qty) => {
-    let payload = {
+    const payload = {
         id: id,
         qty: qty
     };
 
     return ({ payload, type: CHANGE_QTY });
 };
-export const checkout = payload => ({payload, type: CHECKOUT});
+export const checkout = payload => ({ payload, type: CHECKOUT });
 export const sort = payload => ({ payload, type: SORT });
 export const endRequest = () => ({ type: END_REQUEST });
 export const errorRequest = error => ({ error, type: ERROR_REQUEST });
@@ -64,7 +64,7 @@ const initialState = {
     request: {
         pending: false,
         error: null,
-        success: null,
+        success: null
     },
     singleProduct: {},
     cartProducts: [],
@@ -74,15 +74,14 @@ const initialState = {
     direction: 'asc',
     summary: {
         items: [],
-        sum: 0,
+        sum: 0
     },
-    search: '',
+    search: ''
 };
 
 /* THUNKS */
 export const loadProductsByPageRequest = (page, sortBy = 'title', direction = 'asc', search = '') => {
     return async dispatch => {
-
         dispatch(startRequest());
         try {
             const startAt = (page - 1) * PRODUCTS_PER_PAGE;
@@ -90,10 +89,10 @@ export const loadProductsByPageRequest = (page, sortBy = 'title', direction = 'a
             let url = `${API_URL}/products/range/${startAt}/${PRODUCTS_PER_PAGE}?sortBy=${sortBy}&direction=${direction}`;
 
             if (search) {
-                url = url + `&search=${search}`
+                url = url + `&search=${search}`;
             }
 
-            let res = await axios.get(url);
+            const res = await axios.get(url);
 
             const payload = {
                 products: res.data.products,
@@ -101,12 +100,12 @@ export const loadProductsByPageRequest = (page, sortBy = 'title', direction = 'a
                 presentPage: page,
                 sortBy,
                 direction,
-                search,
+                search
             };
 
             dispatch(loadProductsByPage(payload));
             dispatch(endRequest());
-        } catch(e) {
+        } catch (e) {
             dispatch(errorRequest(e.message));
         }
     };
@@ -114,15 +113,13 @@ export const loadProductsByPageRequest = (page, sortBy = 'title', direction = 'a
 
 export const loadSingleProductRequest = id => {
     return async dispatch => {
-
         dispatch(startRequest());
         try {
             axios.get(`${API_URL}/products/${id}`).then(res => {
-
                 dispatch(loadSingleProduct(res.data));
                 dispatch(endRequest());
-            })
-        } catch(e) {
+            });
+        } catch (e) {
             dispatch(errorRequest(e.message));
         }
     };
@@ -130,121 +127,118 @@ export const loadSingleProductRequest = id => {
 
 export const checkoutRequest = (cartProducts, couponCode) => {
     return async dispatch => {
-
         dispatch(startRequest());
         try {
-            const data = {cartProducts, couponCode};
+            const data = { cartProducts, couponCode };
 
             axios.post(`${API_URL}/checkout`, data).then(res => {
-
                 dispatch(checkout(res.data));
                 dispatch(endRequest());
-            })
-        } catch(e) {
+            });
+        } catch (e) {
             dispatch(errorRequest(e.message));
         }
     };
 };
 
 /* REDUCER */
-export default function reducer(statePart = initialState, action = {}) {
+export default function reducer (statePart = initialState, action = {}) {
     switch (action.type) {
+    case START_REQUEST:
+        return { ...statePart, request: { pending: true, error: null, success: null } };
 
-        case START_REQUEST:
-            return { ...statePart, request: { pending: true, error: null, success: null } };
+    case LOAD_SINGLE_PRODUCT:
+        return { ...statePart, singleProduct: action.payload };
 
-        case LOAD_SINGLE_PRODUCT:
-            return { ...statePart, singleProduct: action.payload };
+    case ADD_PRODUCT:
+        const productIdToAdd = action.payload;
 
-        case ADD_PRODUCT:
-            const productIdToAdd = action.payload;
-
-            const hasAlreadyCartProduct = statePart.cartProducts.find(
-                (cartProduct) => {
-                    return cartProduct.id === productIdToAdd
-                }
-            );
-
-            if (hasAlreadyCartProduct) {
-                const cartProducts = statePart.cartProducts.map(
-                    (cartProduct) => {
-                        if (cartProduct.id === productIdToAdd) {
-                            return { ...cartProduct, quantity: cartProduct.quantity + 1 };
-                        }
-
-                        return cartProduct;
-                    }
-                );
-
-                return { ...statePart, cartProducts };
+        const hasAlreadyCartProduct = statePart.cartProducts.find(
+            (cartProduct) => {
+                return cartProduct.id === productIdToAdd;
             }
+        );
 
-            const product = statePart.data.find(
-                (product) => {
-                    return product.id === productIdToAdd
+        if (hasAlreadyCartProduct) {
+            const cartProducts = statePart.cartProducts.map(
+                (cartProduct) => {
+                    if (cartProduct.id === productIdToAdd) {
+                        return { ...cartProduct, quantity: cartProduct.quantity + 1 };
+                    }
+
+                    return cartProduct;
                 }
             );
 
-            const cartProduct = { ...product, quantity: 1 };
+            return { ...statePart, cartProducts };
+        }
 
-            return {
-                ...statePart,
-                cartProducts: [...statePart.cartProducts, cartProduct],
-            };
+        const product = statePart.data.find(
+            (product) => {
+                return product.id === productIdToAdd;
+            }
+        );
 
-        case REMOVE_CART_PRODUCT:
-            const productIdToRemove = action.payload;
+        const cartProduct = { ...product, quantity: 1 };
 
-            return {
-                ...statePart,
-                cartProducts: statePart.cartProducts.filter((cartProduct) => {
-                    return cartProduct.id !== productIdToRemove;
-                })
-            };
+        return {
+            ...statePart,
+            cartProducts: [...statePart.cartProducts, cartProduct]
+        };
 
-        case CHANGE_QTY:
-            const { id, qty } = action.payload;
+    case REMOVE_CART_PRODUCT:
+        const productIdToRemove = action.payload;
 
-            return {
-                ...statePart,
-                cartProducts: statePart.cartProducts.map(
-                    (product) => {
-                        if (product.id !== id) {
-                            return product;
-                        }
+        return {
+            ...statePart,
+            cartProducts: statePart.cartProducts.filter((cartProduct) => {
+                return cartProduct.id !== productIdToRemove;
+            })
+        };
 
-                        return { ...product, quantity: qty };
+    case CHANGE_QTY:
+        const { id, qty } = action.payload;
+
+        return {
+            ...statePart,
+            cartProducts: statePart.cartProducts.map(
+                (product) => {
+                    if (product.id !== id) {
+                        return product;
                     }
-                )
-            };
 
-        case CHECKOUT:
-            return {
-                ...statePart,
-                summary: action.payload
-            };
+                    return { ...product, quantity: qty };
+                }
+            )
+        };
 
-        case END_REQUEST:
-            return { ...statePart, request: { pending: false, error: null, success: true } };
+    case CHECKOUT:
+        return {
+            ...statePart,
+            summary: action.payload
+        };
 
-        case ERROR_REQUEST:
-            return { ...statePart, request: { pending: false, error: action.error, success: false } };
+    case END_REQUEST:
+        return { ...statePart, request: { pending: false, error: null, success: true } };
 
-        case RESET_REQUEST:
-            return { ...statePart, request: { pending: false, error: null, success: null } };
+    case ERROR_REQUEST:
+        return { ...statePart, request: { pending: false, error: action.error, success: false } };
 
-        case LOAD_PRODUCTS:
-            return {
-                ...statePart,
-                presentPage: action.payload.presentPage,
-                amount: action.payload.amount,
-                data: [...action.payload.products],
-                sortBy: action.payload.sortBy,
-                direction: action.payload.direction,
-                search: action.payload.search,
-            };
+    case RESET_REQUEST:
+        return { ...statePart, request: { pending: false, error: null, success: null } };
 
-        default:
-            return statePart;
+    case LOAD_PRODUCTS:
+        return {
+            ...statePart,
+            presentPage: action.payload.presentPage,
+            amount: action.payload.amount,
+            data: [...action.payload.products],
+            sortBy: action.payload.sortBy,
+            direction: action.payload.direction,
+            search: action.payload.search
+        };
+
+    default:
+        return statePart;
     }
 };

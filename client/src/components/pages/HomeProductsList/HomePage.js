@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import Products from "../../features/Products/ProductsContainer";
-import SideBar from '../../features/SideBar/SideBarContainer'
+import Products from '../../features/Products/ProductsContainer';
+import SideBar from '../../features/SideBar/SideBarContainer';
 
 const HomePage = () => (
     <Container>

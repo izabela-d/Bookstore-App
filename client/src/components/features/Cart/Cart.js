@@ -2,38 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import CartProduct from './CartProduct';
-import PageTitle from "../../common/PageTitle/PageTitle";
+import PageTitle from '../../common/PageTitle/PageTitle';
 import { Row, Col, Input, Button, Alert } from 'reactstrap';
 import './Cart.scss';
-import Currency from "../../common/Currency/Currency";
+import Currency from '../../common/Currency/Currency';
 import Spinner from '../../common/Spinner/Spinner';
 
 class Cart extends React.Component {
-
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
             couponCode: ''
-        }
+        };
     }
 
     handleClick = () => {
-        this.props.checkout (this.props.cartProducts, this.state.couponCode);
+        this.props.checkout(this.props.cartProducts, this.state.couponCode);
     };
 
     handleCouponCode = (event) => {
-        this.setState({couponCode: event.target.value})
+        this.setState({ couponCode: event.target.value });
     };
 
-    render() {
-        const {cartProducts, totalPrice, changeQty, removeCartProduct } = this.props;
+    render () {
+        const { cartProducts, totalPrice, changeQty, removeCartProduct } = this.props;
 
         if (this.props.isError) {
             return (
                 <div>
                     <Alert color={'error'}>error</Alert>
                 </div>
-            )
+            );
         }
 
         if (this.props.isLoading) {
@@ -41,7 +40,7 @@ class Cart extends React.Component {
                 <div>
                     <Spinner />
                 </div>
-            )
+            );
         }
 
         if (cartProducts.length > 0) {
@@ -62,7 +61,7 @@ class Cart extends React.Component {
                                 stockCount={product.stockCount}
                                 onQtyChange={(id, quantity) => changeQty(id, quantity)}
                                 onRemoveProduct={(id) => removeCartProduct(id)}
-                            />
+                            />;
                         })}
                     </div>
                     <div className={'checkout'}>
@@ -77,9 +76,9 @@ class Cart extends React.Component {
                             </Col>
                             <Col>
                                 <Link to="/summary"
-                                      onClick={() => {
-                                          this.handleClick()
-                                      }}
+                                    onClick={() => {
+                                        this.handleClick();
+                                    }}
                                 >
                                     <Button
                                         color={'success'}
@@ -96,14 +95,14 @@ class Cart extends React.Component {
                         </Row>
                     </div>
                 </div>
-            )
+            );
         }
 
         return (
             <div>
                 <Alert color={'info'}>No products!</Alert>
             </div>
-        )
+        );
     }
 }
 
@@ -116,7 +115,7 @@ Cart.propTypes = {
             author: PropTypes.string,
             content: PropTypes.string,
             price: PropTypes.string,
-            quantity: PropTypes.number,
+            quantity: PropTypes.number
         })
     )
 };

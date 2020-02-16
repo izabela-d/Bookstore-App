@@ -1,26 +1,25 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import { Button, Alert } from 'reactstrap';
-import Currency from "../../common/Currency/Currency";
-import Image from "../../common/Image/Image";
+import Currency from '../../common/Currency/Currency';
+import Image from '../../common/Image/Image';
 import './SingleProduct.scss';
 import Spinner from '../../common/Spinner/Spinner';
 
 class SingleProduct extends React.Component {
-
     handleClick = (id) => {
-        this.props.addProductToCart (id);
-        this.props.history.push("/cart");
+        this.props.addProductToCart(id);
+        this.props.history.push('/cart');
     };
 
-    componentDidMount() {
-        const { loadSingleProduct, match} = this.props;
+    componentDidMount () {
+        const { loadSingleProduct, match } = this.props;
 
         loadSingleProduct(match.params.id);
     }
 
-    render() {
+    render () {
         const { singleProduct } = this.props;
 
         if (!singleProduct && this.props.isError) {
@@ -28,7 +27,7 @@ class SingleProduct extends React.Component {
                 <div>
                     <Alert color={'error'}>error</Alert>
                 </div>
-            )
+            );
         }
 
         if (!singleProduct && this.props.isLoading) {
@@ -36,7 +35,7 @@ class SingleProduct extends React.Component {
                 <div>
                     <Spinner />
                 </div>
-            )
+            );
         }
 
         if (singleProduct) {
@@ -63,7 +62,7 @@ class SingleProduct extends React.Component {
                     </p>
                     <Button
                         onClick={() => {
-                            this.handleClick(singleProduct.id)
+                            this.handleClick(singleProduct.id);
                         }}
                         color={'success'}
                     >
@@ -71,14 +70,14 @@ class SingleProduct extends React.Component {
                     </Button>
                     <p>{singleProduct.content}</p>
                 </div>
-            )
+            );
         }
 
         return (
             <div>
                 <Alert color={'info'}>No products!</Alert>
             </div>
-        )
+        );
     }
 }
 
@@ -91,10 +90,10 @@ SingleProduct.propTypes = {
         content: PropTypes.string,
         oldPrice: PropTypes.string,
         price: PropTypes.string,
-        feature: PropTypes.string,
+        feature: PropTypes.string
     }),
     loadSingleProduct: PropTypes.func.isRequired,
-    addProductToCart: PropTypes.func.isRequired,
+    addProductToCart: PropTypes.func.isRequired
 };
 
 export default withRouter(props => <SingleProduct {...props}/>);

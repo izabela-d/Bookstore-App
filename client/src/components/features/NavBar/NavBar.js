@@ -1,22 +1,21 @@
 import React from 'react';
-import Logo from "../../common/Logo/Logo";
+import Logo from '../../common/Logo/Logo';
 import MainMenu from '../../layouts/MainMenu/MainMenu';
 import './Navbar.scss';
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 
 class NavBar extends React.Component {
-
     state = {
         links: [
             { path: '/', title: 'Home' },
             { path: '/faq', title: 'FAQ' },
             { path: '/policy', title: 'Policy' },
             { path: '/contact', title: 'Contact' },
-            { path: '/cart', title: 'Cart', icon: faShoppingBasket},
-        ],
+            { path: '/cart', title: 'Cart', icon: faShoppingBasket }
+        ]
     };
 
-    render() {
+    render () {
         const { links } = this.state;
 
         return (
@@ -26,7 +25,6 @@ class NavBar extends React.Component {
             </nav>
         );
     }
-
 }
 
 export default NavBar;

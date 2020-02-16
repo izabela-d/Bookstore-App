@@ -1,11 +1,10 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Col } from "reactstrap";
+import { Col, Button } from 'reactstrap';
 import './ProductSummary.scss';
-import Currency from "../../common/Currency/Currency";
-import Image from "../../common/Image/Image";
-import { Button } from 'reactstrap';
+import Currency from '../../common/Currency/Currency';
+import Image from '../../common/Image/Image';
 
 const ProductsSummary = ({ id, title, author, oldPrice, price, feature, image }) => (
 
@@ -16,21 +15,21 @@ const ProductsSummary = ({ id, title, author, oldPrice, price, feature, image })
                 <div className={'label-product'}>
                     <br />
 
-                    {feature==='promotion' &&
+                    {feature === 'promotion' &&
                     <Button
                         outline color={'danger'}
                     >
                         {feature}
                     </Button>
                     }
-                    {feature==='best' &&
+                    {feature === 'best' &&
                     <Button
                         outline color={'warning'}
                     >
                         {feature}
                     </Button>
                     }
-                    {feature==='new' &&
+                    {feature === 'new' &&
                     <Button
                         outline color={'info'}
                     >
@@ -62,7 +61,7 @@ ProductsSummary.propTypes = {
     author: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     oldPrice: PropTypes.string,
-    feature: PropTypes.string,
+    feature: PropTypes.string
 };
 
 export default ProductsSummary;

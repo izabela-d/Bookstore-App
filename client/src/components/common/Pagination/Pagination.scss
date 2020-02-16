@@ -1,17 +1,19 @@
+@import '../../../styles/settings.scss';
+
 .pagination {
   margin-top: 20px;
   justify-content: center;
 
   .page-item {
     .page-link {
-      background-color: #F5C10C;
-      border-color: #F5C10C;
+      background-color: $text-color-orange;
+      border-color:$text-color-orange;
       color: #000;
     }
 
     &.active .page-link {
-      background-color: #808080;
-      border-color: #808080;
+      background-color: $text-color-grey;
+      border-color: $text-color-grey;
       color: #FFF;
     }
   }

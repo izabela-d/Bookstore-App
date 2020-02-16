@@ -1,5 +1,5 @@
 import React from 'react';
-import SingleProduct from "../../features/SingleProduct/SingleProductContainer";
+import SingleProduct from '../../features/SingleProduct/SingleProductContainer';
 
 const SingleProductPage = () => (
     <div>

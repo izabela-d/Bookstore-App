@@ -10,12 +10,12 @@ import SingleProduct from './SingleProduct';
 const mapStateToProps = state => ({
     singleProduct: getSingleProduct(state),
     isLoading: isLoading(state),
-    isError: isError(state),
+    isError: isError(state)
 });
 
 const mapDispatchToProps = dispatch => ({
     loadSingleProduct: (id) => dispatch(loadSingleProductRequest(id)),
-    addProductToCart: (id) => dispatch(addProductToCart(id)),
+    addProductToCart: (id) => dispatch(addProductToCart(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);

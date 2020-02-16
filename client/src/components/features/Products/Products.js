@@ -1,17 +1,16 @@
 import React from 'react';
-import {PropTypes} from 'prop-types';
+import { PropTypes } from 'prop-types';
 import { Alert } from 'reactstrap';
 import Pagination from '../../common/Pagination/Pagination';
 import ProductsList from '../ProductsList/ProductsList';
 import Spinner from '../../common/Spinner/Spinner';
 
 class Products extends React.Component {
-
     state = {
         presentPage: this.props.initialPage || 1
     };
 
-    componentDidMount() {
+    componentDidMount () {
         const { loadProductsByPage } = this.props;
 
         loadProductsByPage(this.props.initialPage);
@@ -19,12 +18,12 @@ class Products extends React.Component {
 
     loadProductPage = (page) => {
         const { loadProductsByPage, sortBy, direction, search } = this.props;
-        this.setState({presentPage: page});
+        this.setState({ presentPage: page });
 
         loadProductsByPage(page, sortBy, direction, search);
     };
 
-    render() {
+    render () {
         const { products, pages, pagination } = this.props;
         const { loadProductPage } = this;
         const { presentPage } = this.state;
@@ -34,7 +33,7 @@ class Products extends React.Component {
                 <div>
                     <Alert color={'error'}>error</Alert>
                 </div>
-            )
+            );
         }
 
         if (this.props.isLoading) {
@@ -42,7 +41,7 @@ class Products extends React.Component {
                 <div>
                     <Spinner />
                 </div>
-            )
+            );
         }
 
         if (products.length > 0) {
@@ -58,14 +57,14 @@ class Products extends React.Component {
                     />
                     }
                 </div>
-            )
+            );
         }
 
         return (
             <div>
                 <Alert color={'info'}>No products!</Alert>
             </div>
-        )
+        );
     }
 }
 
@@ -78,19 +77,19 @@ Products.propTypes = {
             content: PropTypes.string.isRequired,
             oldPrice: PropTypes.string,
             price: PropTypes.string.isRequired,
-            feature: PropTypes.string,
+            feature: PropTypes.string
         })
     ),
     initialPage: PropTypes.number,
     loadProductsByPage: PropTypes.func.isRequired,
     pagination: PropTypes.bool,
     sortBy: PropTypes.string.isRequired,
-    direction: PropTypes.string.isRequired,
+    direction: PropTypes.string.isRequired
 };
 
 Products.defaultProps = {
     initialPage: 1,
-    pagination: true,
+    pagination: true
 };
 
 export default Products;

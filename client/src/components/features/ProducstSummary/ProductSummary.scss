@@ -1,9 +1,11 @@
+@import '../../../styles/settings.scss';
+
 .product-container {
   padding: 1px 0;
 
   a {
     text-decoration: none;
-    color: black;
+    color: #000;
 
     .product-box {
       height: 350px;
@@ -31,9 +33,9 @@
   }
   &:hover {
     padding: 0;
-    border: 1px solid #E7AE03;
+    border: 1px solid $text-color-orange;
     .label-product {
-      color: #E7AE03;
+      color: $text-color-orange;
     }
   }
 }

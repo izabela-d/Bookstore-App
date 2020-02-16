@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import Currency from "../../common/Currency/Currency";
-import Image from "../../common/Image/Image";
+import Currency from '../../common/Currency/Currency';
+import Image from '../../common/Image/Image';
 import { Row, Col, InputGroup, Input, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './CartProduct.scss';
 
 class CartProduct extends React.Component {
-    render() {
-
+    render () {
         const { id, image, title, author, price, quantity, onRemoveProduct, onQtyChange } = this.props;
 
         return (
@@ -19,7 +18,7 @@ class CartProduct extends React.Component {
                     <Col sm={'3'} md={'2'} >
                         <Image image={ image }/>
                     </Col>
-                    <Col  sm={'3'} md={'4'}>
+                    <Col sm={'3'} md={'4'}>
                         <h4>
                             <strong>{ title }</strong>
                         </h4>
@@ -27,9 +26,9 @@ class CartProduct extends React.Component {
                             { author }
                         </h4>
                     </Col>
-                    <Col  sm={'6'}>
+                    <Col sm={'6'}>
                         <Row>
-                            <Col  sm={'3'}>
+                            <Col sm={'3'}>
                                 <h5 className={'amount'}>
                                     <strong>
                                         <Currency value={ price }/>
@@ -37,7 +36,7 @@ class CartProduct extends React.Component {
                                     </strong>
                                 </h5>
                             </Col>
-                            <Col  sm={'6'}>
+                            <Col sm={'6'}>
                                 <InputGroup>
                                     <Input
                                         onClick={() => onQtyChange(id, quantity + 1)}
@@ -50,9 +49,9 @@ class CartProduct extends React.Component {
                                             const value = parseInt(event.target.value);
 
                                             if (!isNaN(value)) {
-                                                onQtyChange(id, value)
+                                                onQtyChange(id, value);
                                             } else {
-                                                onQtyChange(id, 0)
+                                                onQtyChange(id, 0);
                                             }
                                         }}
                                         min={0}
@@ -68,7 +67,7 @@ class CartProduct extends React.Component {
                                     />
                                 </InputGroup>
                             </Col>
-                            <Col  sm={'3'}>
+                            <Col sm={'3'}>
                                 <Button
                                     onClick={() => onRemoveProduct(id)}
                                     color={'warning'}
@@ -95,7 +94,7 @@ CartProduct.propTypes = {
     quantity: PropTypes.number,
     stockCount: PropTypes.number,
     onQtyChange: PropTypes.func.isRequired,
-    onRemoveProduct: PropTypes.func.isRequired,
+    onRemoveProduct: PropTypes.func.isRequired
 };
 
 export default withRouter(props => <CartProduct {...props}/>);

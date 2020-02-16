@@ -1,15 +1,14 @@
-import React from 'react'
+import React from 'react';
 import { IMAGE_URL } from '../../../config';
 import './Image.scss';
 
-const Image = ({image}) => {
-
+const Image = ({ image, alt }) => {
     if (!image) {
-        return ''
+        return '';
     }
     return (
-        <img src={`${IMAGE_URL}/${image}`} alt={'photo'} className={'image'}/>
-        )
+        <img src={`${IMAGE_URL}/${image}`} alt={alt} className={'image'}/>
+    );
 };
 
 export default Image;

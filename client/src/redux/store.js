@@ -6,7 +6,7 @@ import products from './productsRedux';
 
 // combine reducers
 const rootReducer = combineReducers({
-    products: products,
+    products: products
 });
 
 const composeEnhancer = (window.__REDUX_DEVTOOLS_EXTENSION__)

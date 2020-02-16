@@ -3,7 +3,7 @@ const Product = require('../models/product.model');
 // checkout
 exports.checkout = async (req, res) => {
     let sum = 0;
-    let items = [];
+    const items = [];
 
     const { cartProducts, couponCode } = req.body;
 
@@ -24,8 +24,8 @@ exports.checkout = async (req, res) => {
             title: product.title,
             author: product.author,
             quantity: cartProduct.quantity,
-            price: product.price,
-        })
+            price: product.price
+        });
     });
 
     if (couponCode) {
@@ -36,16 +36,15 @@ exports.checkout = async (req, res) => {
                 id: 'promo10',
                 title: '-10% discount',
                 quantity: 1,
-                price: discount,
+                price: discount
             });
             sum = sum - discount;
-        }
-        else {
+        } else {
             items.push({
                 id: 'badCode',
                 title: 'Invalid coupon code',
                 quantity: 0,
-                price: 0,
+                price: 0
             });
         }
     }
@@ -53,5 +52,5 @@ exports.checkout = async (req, res) => {
     res.status(200).json({
         items: items,
         sum: sum
-    })
+    });
 };

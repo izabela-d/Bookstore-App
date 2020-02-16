@@ -5,61 +5,59 @@ import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import './Pagination.scss';
 
 class Paginations extends React.Component {
-
     changePage = (newPage) => {
         const { onPageChange } = this.props;
 
         onPageChange(newPage);
     };
 
-    render() {
+    render () {
         const { pages, presentPage } = this.props;
         const { changePage } = this;
 
         return (
             <Pagination aria-label="Page navigation example">
 
-                    {presentPage > 1 &&
+                {presentPage > 1 &&
                     <PaginationItem>
                         <PaginationLink
                             previous href="#"
-                            onClick={() => { changePage(presentPage -1)}}
-                            />
+                            onClick={() => { changePage(presentPage - 1); }}
+                        />
                     </PaginationItem>
-                    }
+                }
 
-                    {[...Array(pages)].map((el, page) =>
-                        <PaginationItem
-                            key={++page}
-                            active={page === presentPage}
+                {[...Array(pages)].map((el, page) =>
+                    <PaginationItem
+                        key={++page}
+                        active={page === presentPage}
+                    >
+                        <PaginationLink
+                            onClick={() => { changePage(page); }}
                         >
-                            <PaginationLink
-                                onClick={() => { changePage(page) }}
-                            >
-                                {page}
-                            </PaginationLink>
-                        </PaginationItem>
-                    )}
+                            {page}
+                        </PaginationLink>
+                    </PaginationItem>
+                )}
 
-                    {presentPage < pages &&
+                {presentPage < pages &&
                     <PaginationItem>
                         <PaginationLink
                             next href="#"
-                            onClick={() => { changePage(presentPage +1)}}
+                            onClick={() => { changePage(presentPage + 1); }}
                         />
                     </PaginationItem>
-                    }
+                }
 
             </Pagination>
         );
     }
-
 }
 
 Paginations.propTypes = {
     pages: PropTypes.number.isRequired,
     presentPage: PropTypes.number,
-    onPageChange: PropTypes.func.isRequired,
+    onPageChange: PropTypes.func.isRequired
 };
 
 export default Paginations;

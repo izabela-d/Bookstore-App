@@ -4,8 +4,7 @@ import { ListGroup, Button, ButtonToggle, Input } from 'reactstrap';
 import './SideBar.scss';
 
 class SideBar extends React.Component {
-
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
             search: ''
@@ -26,10 +25,10 @@ class SideBar extends React.Component {
     };
 
     handleSearchChange = (event) => {
-        this.setState({search: event.target.value})
+        this.setState({ search: event.target.value });
     };
 
-    render() {
+    render () {
         return (
             <div>
                 <h5 className={'sort'}>Sort:</h5>
@@ -88,17 +87,16 @@ class SideBar extends React.Component {
             </div>
         );
     }
-
 }
 
 SideBar.propTypes = {
     loadProductsByPageRequest: PropTypes.func.isRequired,
     sortBy: PropTypes.string.isRequired,
-    direction: PropTypes.string.isRequired,
+    direction: PropTypes.string.isRequired
 };
 
 SideBar.defaultProps = {
-    initialPage: 1,
+    initialPage: 1
 };
 
 export default SideBar;

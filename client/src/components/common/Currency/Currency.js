@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-const Currency = ({value}) => (
+const Currency = ({ value }) => (
     <span>{ value }$</span>
 );
 
