@@ -4,7 +4,7 @@ import './Spinner.scss';
 
 const Spinners = () => (
 
-    <Spinner color={'primary'} />
+    <Spinner color={'secondary'} />
 );
 
 export default Spinners;

@@ -17,6 +17,6 @@ Todo:
 - [x] logo
 - [ ] zdjecia
 - [x] ikona
-- [ ] spinner
+- [x] spinner
 - [ ] eslint
 - [ ] navbar
