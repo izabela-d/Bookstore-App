@@ -1,0 +1,14 @@
+.logo {
+  color: #FFF;
+
+  .title-logo {
+    display: inline;
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo {
+    display: none;
+  }
+}

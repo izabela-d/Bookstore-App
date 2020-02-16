@@ -1,10 +1,22 @@
 # Bookstore-App
 
+## Heroku app url
+[https://bookstore-app00.herokuapp.com/](https://bookstore-app00.herokuapp.com/)
+
+### Install
+
+After cloning repository, install required packages using command `yarn install`.
+
+### Open App
+
+Using command `yarn start`.
+
+
 Todo:  
-- [x] Filter
-- [x] Coupon code
-- [x] currency
-- [ ] Request loader
-- [x] Photos
-- [ ] reducer na dwa
-- [ ] Styles
+
+- [x] logo
+- [ ] zdjecia
+- [ ] ikona
+- [ ] spinner
+- [ ] eslint
+- [ ] navbar
