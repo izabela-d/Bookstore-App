@@ -13,11 +13,13 @@
       border-bottom: 1px solid #bdc7cb;
 
       .label-product {
+        button {
+          margin: 15px;
+        }
 
         .title {
           font-weight: 700;
           text-transform: uppercase;
-          padding-top: 15px;
         }
 
         .old-price {

@@ -62,7 +62,7 @@ class Summary extends React.Component {
                     </tbody>
                 </Table>
                 <div className={'order-total'}>
-                    Order total: <Currency value={summary.sum}/>
+                    Order total: <Currency value={summary.sum.toFixed(2)}/>
                 </div>
             </div>
         )
