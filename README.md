@@ -11,12 +11,6 @@ After cloning repository, install required packages using command `yarn install`
 
 Using command `yarn start`.
 
+#### Coupon code: 
 
-Todo:  
-
-- [x] logo
-- [x] zdjecia
-- [x] ikona
-- [x] spinner
-- [ ] eslint
-- [ ] navbar
+PROMO10
